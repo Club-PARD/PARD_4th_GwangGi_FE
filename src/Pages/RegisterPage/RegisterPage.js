@@ -1,12 +1,12 @@
 import { BaseContainer } from "../../Layout/Container";
 
-function IntroPage() {
+function RegisterPage() {
     
     return (
         <BaseContainer>
-            IntroPage
+            RegisterPage
         </BaseContainer>
     )
 }
 
-export default IntroPage;
+export default RegisterPage;
