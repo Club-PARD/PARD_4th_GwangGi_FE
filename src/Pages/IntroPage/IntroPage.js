@@ -1,15 +1,14 @@
-import { testAPI } from "../../API/TestAPI";
 import { BaseContainer } from "../../Layout/Container";
+import GoogleLoginButton from "../RegisterPage/Components/GoogleLoginButton";
+import { useNavigate } from "react-router-dom";
 
 function IntroPage() {
-    const handleTestAPI = () => {
-        const result = testAPI();
-        console.log(result);
-    }
+
+    const navigate = useNavigate();
     return (
         <BaseContainer>
             IntroPage
-            <button onClick = {handleTestAPI}>테스트</button>
+            <GoogleLoginButton navigate={navigate} />
         </BaseContainer>
     )
 }
