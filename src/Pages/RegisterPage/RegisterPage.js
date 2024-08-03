@@ -58,12 +58,17 @@ function RegisterPage() {
         };
 
         if (window.confirm("등록하시겠습니까?")) {
+            console.log(transformedData);
             try {
                 const response = await handlePostRegister(transformedData);
-                // if (response.status === 200) {
-                alert("등록되었습니다.");
-                navigate("/home");
-                // }
+                if (response.response_object._new_user === false) {
+                    alert("등록되었습니다.");
+                    navigate("/home");
+                } else {
+                    alert("이미 등록된 유저입니다.");
+                    navigate("/");
+                }
+
             } catch (error) {
                 console.error("등록 중 오류 발생:", error);
                 alert("등록 실패. 다시 시도해 주세요.");
