@@ -18,11 +18,11 @@ function Router() {
         <Routes>
             <Route
                 path="/"
-                element={<PublicRoute element={<IntroPage />} restricted={true} />}
+                element={<PublicRoute element={<IntroPage />}/>}
             />
             <Route
                 path="/register"
-                element={<PublicRoute element={<RegisterPage />} restricted={true} />}
+                element={<PublicRoute element={<RegisterPage />} />}
             />
             <Route element={<Layout />}>
                 <Route

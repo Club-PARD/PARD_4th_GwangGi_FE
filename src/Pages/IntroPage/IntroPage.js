@@ -1,6 +1,6 @@
 import { BaseContainer } from "../../Layout/Container";
 import GoogleLoginButton from "../RegisterPage/Components/GoogleLoginButton";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 function IntroPage() {
 
