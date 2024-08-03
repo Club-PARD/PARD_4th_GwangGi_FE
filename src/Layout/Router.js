@@ -22,7 +22,7 @@ function Router() {
             />
             <Route
                 path="/register"
-                element={<PublicRoute element={<RegisterPage />} />}
+                element={<PrivateRoute element={<RegisterPage />} />}
             />
             <Route element={<Layout />}>
                 <Route
