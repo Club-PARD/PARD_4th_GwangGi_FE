@@ -30,7 +30,6 @@ export const handleTest = async () => {
 export const handlePostRegister = async (newUserInfo) => {
 
     try {
-        console.log("newUserInfo", newUserInfo);
         const response = await axios.post(
             `${process.env.REACT_APP_URL}api/register`,
             newUserInfo,
@@ -42,7 +41,8 @@ export const handlePostRegister = async (newUserInfo) => {
             }
         );
         console.log("handlePostRegsiter success");
+        return response.data;
     } catch (error) {
-        console.log("handlePostRegsiter fail");
+        console.log("handlePostRegsiter fail", error);
     }
 }
