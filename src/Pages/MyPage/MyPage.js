@@ -75,6 +75,7 @@ function MyPage() {
 
     const handleUpdateUserInfo = () => {
         if (window.confirm("수정하시겠습니까?")) {
+            // 나중에 여기 파트에 axios.patch or put 하는 핸들러 가져와서 updatedUserInfo를 파라미터로 넣고 실행하면 돼! try catch문 써서 여기 핸들러 안에서 error catch 해주는 것까지 해주면 최고일듯!
             alert("수정되었습니다.");
             setUserInfo(updateUserInfo);
             setIsEditing(!isEditing);
