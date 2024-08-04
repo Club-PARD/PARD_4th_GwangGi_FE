@@ -11,10 +11,30 @@ export const getUserInfo = async () => {
                 }
             }
         );
-        console.log("handlePostRegsiter success");
+        console.log("getUserInfo success");
         return response.data.response_object;
     } catch (error) {
-        console.log("handlePostRegsiter fail", error);
+        console.log("getUserInfo fail", error);
+        return 500;
+    }
+}
+
+export const getUserAbleTo = async () => {
+    try {
+        const response = await axios.get(
+            `${process.env.REACT_APP_URL}api/user/duedate`,
+            {
+                withCredentials: true,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+        );
+        console.log("getUserAbleTo success");
+        // console.log(response);
+        return response.data.response_object;
+    } catch (error) {
+        console.log("getUserAbleTo fail", error);
         return 500;
     }
 }

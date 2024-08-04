@@ -1,20 +1,25 @@
 import {useEffect, useState} from "react";
-import {getUserInfo} from "../../API/UserAPI";
+import {getUserAbleTo, getUserInfo} from "../../API/UserAPI";
 import styled from "styled-components";
 import getCalculateAge from "./CalculateAge";
 import {FlexContainer} from "../../Layout/Container";
 import { Input, Option, Select } from "../../Layout/Form";
+import { useNavigate } from "react-router-dom";
 
 function MyPage() {
     const [userInfo, setUserInfo] = useState({});
+    const [ableTo, setAbleTo] = useState();
     const [updateUserInfo, setUpdateUserInfo] = useState({});
     const [isEditing, setIsEditing] = useState(false);
-
+    const navigate = useNavigate();
+    
     useEffect(() => {
         const fetchData = async () => {
             const response = await getUserInfo();
             if (response === 500) {
                 alert("[에러] 관리자에게 문의하세요 (서버 500)")
+                window.sessionStorage.clear();
+                navigate("/");
             } else {
                 setUserInfo(response);
                 setUpdateUserInfo({
@@ -23,7 +28,18 @@ function MyPage() {
                 });
             }
         }
+
+        const fetchData2 = async () => {
+            const response = await getUserAbleTo();
+            if (response === 500) {
+                alert("[에러] 관리자에게 문의하세요 (서버 500)")
+            } else {
+                console.log(response);
+                setAbleTo(response.dueDate);
+            }
+        }
         fetchData();
+        fetchData2();
     }, []);
 
     const formatDate = (date) => {
@@ -87,10 +103,22 @@ function MyPage() {
             setIsEditing(!isEditing);
         }
     }
+    
+    const handleChangeAbleToSentnece = (day) => {
+        if (day === 0)
+            return "오늘부터 가능합니다!"
+        else if (day < 0)
+            return `${day}일 남았습니다.`
+        else if (day > 0)
+            return `${day}일 지났습니다.`
+    }
 
     return (
         <div>
             MyPage
+            <div>
+                헌혈 가능한 일자 : {handleChangeAbleToSentnece(ableTo)} 
+            </div>
             <UserInfoBox>
                 {
                     isEditing
