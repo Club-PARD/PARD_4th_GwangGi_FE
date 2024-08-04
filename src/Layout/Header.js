@@ -1,14 +1,17 @@
 import styled from "styled-components";
 import { BaseContainer } from "./Container";
 import { Navigate, useNavigate } from "react-router-dom";
+import { handleLogout } from "../API/LoginAPI";
 
 function Header() {
     const navigate = useNavigate();
-    const handleLogOut = () => {
+    const handleLogOut = async () => {
         if (window.confirm("로그아웃 하시겠습니까?")) {
+            const response = await handleLogout();
             alert("로그아웃 되었습니다.");
             window.sessionStorage.clear();
             navigate("/");
+            window.location.reload();
         }
     }
     return (
