@@ -3,6 +3,7 @@ import {getUserInfo} from "../../API/UserAPI";
 import styled from "styled-components";
 import getCalculateAge from "./CalculateAge";
 import {FlexContainer} from "../../Layout/Container";
+import { Input, Option, Select } from "../../Layout/Form";
 
 function MyPage() {
     const [userInfo, setUserInfo] = useState({});
@@ -225,16 +226,5 @@ const CancelButton = styled.button `
     }
 `;
 
-const Input = styled.input `
-    height : 17px;
-    font-size : 17px;
-`;
 
-const Select = styled.select `
-    font-size : 17px;
-`;
-
-const Option = styled.option `
-    font-size : 17px;
-`
 export default MyPage;
