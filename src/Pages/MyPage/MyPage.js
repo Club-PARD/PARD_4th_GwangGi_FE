@@ -3,6 +3,7 @@ import {getUserInfo} from "../../API/UserAPI";
 import styled from "styled-components";
 import getCalculateAge from "./CalculateAge";
 import {FlexContainer} from "../../Layout/Container";
+import { Input, Option, Select } from "../../Layout/Form";
 
 function MyPage() {
     const [userInfo, setUserInfo] = useState({});
@@ -12,11 +13,15 @@ function MyPage() {
     useEffect(() => {
         const fetchData = async () => {
             const response = await getUserInfo();
-            setUserInfo(response);
-            setUpdateUserInfo({
-                ...response,
-                birthday: formatDate(response.birthday) // birthday 초기값 설정
-            });
+            if (response === 500) {
+                alert("[에러] 관리자에게 문의하세요 (서버 500)")
+            } else {
+                setUserInfo(response);
+                setUpdateUserInfo({
+                    ...response,
+                    birthday: formatDate(response.birthday) // birthday 초기값 설정
+                });
+            }
         }
         fetchData();
     }, []);
@@ -75,7 +80,8 @@ function MyPage() {
 
     const handleUpdateUserInfo = () => {
         if (window.confirm("수정하시겠습니까?")) {
-            // 나중에 여기 파트에 axios.patch or put 하는 핸들러 가져와서 updatedUserInfo를 파라미터로 넣고 실행하면 돼! try catch문 써서 여기 핸들러 안에서 error catch 해주는 것까지 해주면 최고일듯!
+            // 나중에 여기 파트에 axios.patch or put 하는 핸들러 가져와서 updatedUserInfo를 파라미터로 넣고 실행하면 돼!
+            // try catch문 써서 여기 핸들러 안에서 error catch 해주는 것까지 해주면 최고일듯!
             alert("수정되었습니다.");
             setUserInfo(updateUserInfo);
             setIsEditing(!isEditing);
@@ -220,16 +226,5 @@ const CancelButton = styled.button `
     }
 `;
 
-const Input = styled.input `
-    height : 17px;
-    font-size : 17px;
-`;
 
-const Select = styled.select `
-    font-size : 17px;
-`;
-
-const Option = styled.option `
-    font-size : 17px;
-`
 export default MyPage;

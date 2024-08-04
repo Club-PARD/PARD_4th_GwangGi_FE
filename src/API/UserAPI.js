@@ -15,5 +15,6 @@ export const getUserInfo = async () => {
         return response.data.response_object;
     } catch (error) {
         console.log("handlePostRegsiter fail", error);
+        return 500;
     }
 }
