@@ -2,3 +2,8 @@
     font-family: "Y_Spotlight";
     src: url("./Y_Spotlight2.ttf") format('truetype');
 }
+
+@font-face {
+    font-family: "PretendardVariable";
+    src: url("./PretendardVariable.ttf") format('truetype');
+}
