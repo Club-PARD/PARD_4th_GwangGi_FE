@@ -17,14 +17,17 @@ function Header() {
     return (
         <HeaderContainer>
             Header
+            블릿지
             <LogOut onClick={handleLogOut}>로그아웃</LogOut>
         </HeaderContainer>
     )
 }
 
 const HeaderContainer = styled(BaseContainer)`
-    height : 40px;
+    height : 100px;
     background-color: pink;
+
+    font-family: 'Y_Spotlight';
 `;
 const LogOut = styled.p`
     &:hover{
