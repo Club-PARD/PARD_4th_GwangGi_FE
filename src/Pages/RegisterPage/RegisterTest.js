@@ -88,13 +88,12 @@ function RegisterPage() {
     return (
         <BaseContainer>
           <RegisterContainer>
-            RegisterPage
             <NumberEclipse>
-              1
+              <p>1</p>
             </NumberEclipse>
             <GuideText>
-              회원가입을 위한 <br/>
-              본인 인증이 필요해요
+              앞으로 사용하게 될  <br/>
+              닉네임을 입력해주세요
             </GuideText>
             <TextBox
               placeholder={placeholderVisible ? "닉네임 입력" : ""}
