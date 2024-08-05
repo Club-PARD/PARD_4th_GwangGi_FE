@@ -9,3 +9,11 @@ export const BaseContainer = styled.div`
     display: flex;
     flex-direction: column;
 `;
+
+export const FlexContainer = styled.div`
+    width: 100%;
+    height : auto;
+
+    display:  flex;
+    flex-direction: ${props => props.flexDirection || "column"};
+`;
