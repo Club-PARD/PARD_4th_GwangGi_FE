@@ -13,6 +13,8 @@ import Layout from "./Layout";
 import PublicRoute from "../Layout/PublicRoute";
 import PrivateRoute from "../Layout/PrivateRoute";
 
+import RegisterTest from "../Pages/RegisterPage/RegisterTest";
+
 function Router() {
     return (
         <Routes>
@@ -24,7 +26,11 @@ function Router() {
                 path="/register"
                 element={<PrivateRoute element={<RegisterPage />} />}
             />
-            <Route element={<Layout />}>
+            <Route
+                path="/test"
+                element={<PrivateRoute element={<RegisterTest />} />}
+            />
+            <Route element={<Layout />}> //테스트용
                 <Route
                     path="/mypage"
                     element={<PrivateRoute element={<MyPage />} />}
