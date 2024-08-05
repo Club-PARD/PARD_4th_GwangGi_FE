@@ -97,9 +97,9 @@ function RegisterPage() {
               본인 인증이 필요해요
             </GuideText>
             <TextBox
-              placeholder={placeholderVisible ? "이름 입력" : ""}
+              placeholder={placeholderVisible ? "닉네임 입력" : ""}
             >
-              <DeleteBtn src = "/Img/RegisterPage/GrayDeleteBtn.png" alt = "삭제버튼" />
+              { /*<DeleteBtn src = "/Img/RegisterPage/GrayDeleteBtn.png" alt = "삭제버튼" /> */}
             </TextBox>
             <TextBox
               placeholder={placeholderVisible ? "XXXX / XX / XX" : ""}

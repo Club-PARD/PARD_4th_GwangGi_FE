@@ -2,7 +2,7 @@ import { BaseContainer } from "../../Layout/Container";
 import GoogleLoginButton from "../RegisterPage/Components/GoogleLoginButton";
 import {useNavigate} from "react-router-dom";
 import styled from "styled-components";
-import React, {Component} from "react";
+import React from "react";
 import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -13,35 +13,31 @@ function IntroPage() {
 
     const navigate = useNavigate();
 
-    // 상단으로 부터 47px 떨어짐
     const settings = {
         //arrows: false,
         autoplay: true,
-        autoplaySpeed: 100,
+        autoplaySpeed: 2000,
         dots: true,
         infinite: true,
         centerMode: true,
-        speed: 400,
+        speed: 500,
         initialSlide: 1,
         slidesToShow: 1,
         slidesToScroll: 1
     };
     return (
         <BaseContainer>
-            IntroPage
-        <Container>
-        <Slider {...settings}>
-          <div>
-            <h3>1</h3>
-          </div>
-          <div>
-            <h3>2</h3>
-          </div>
-          <div>
-            <h3>3</h3>
-          </div>
-        </Slider>
-      </Container>
+        <MySlider {...settings}>
+          <Container>
+            <StyledImage src ="/Img/IntroPage/hc.jpeg" alt = "테스트" />
+          </Container>
+          <Container>
+            <StyledImage src ="/Img/IntroPage/jh.jpeg" alt = "테스트" />
+          </Container>
+          <Container>
+            <StyledImage src ="/Img/IntroPage/mk.jpeg" alt = "테스트" />
+          </Container>
+        </MySlider>
         <GoogleLoginButton navigate={navigate} />
             <SubmitBtn>
                 자가문진 바로가기
@@ -52,7 +48,22 @@ function IntroPage() {
 
 export default IntroPage;
 
-const Container=styled.div`
-    width: 200px;
-    height: 900px;
+const Container = styled.div`
+    margin-top: 47px;
+    margin-bottom: 100px;
+    width: 390px;
+    height: 443.776px;
+    background-color: #EEEEEE;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+
+const MySlider = styled(Slider)`
+`; 
+
+const StyledImage = styled.img`
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 `;

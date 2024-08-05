@@ -18,6 +18,8 @@ export const TextBox = styled.textarea`
   font-weight: 500;
   line-height: 130%; /* 23.4px */
 
+  margin-bottom: 38.72px;
+
   &::placeholder{
     color: #BCBCBC;
     font-family: "Pretendard Variable";
