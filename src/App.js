@@ -2,8 +2,9 @@ import {BrowserRouter} from 'react-router-dom';
 import './App.css';
 import Router from './Layout/Router';
 import {theme} from './Style/theme';
-import {ThemeProvider} from 'styled-components';
-//채채 왔다감
+import { ThemeProvider } from 'styled-components';
+
+import './Style/Font/Font.css';
 
 function App() {
     return (
