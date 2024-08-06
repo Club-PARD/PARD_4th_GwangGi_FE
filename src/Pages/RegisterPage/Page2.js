@@ -6,7 +6,7 @@ import { NumberEclipse as OriginalNumberEclipse } from "./Components/PageNum";
 import { GuideText } from "./Components/GuideText";
 import TextBox from "./Components/TextBox"; // Ensure this is the correct import path
 import { SectionText } from "./Components/SectionText";
-import { SubmitBtn } from "./Components/SubmitBtn";
+import { SubmitBtn as OriginalSubmitBtn } from "./Components/SubmitBtn";
 import { SelectBtn } from "./Components/SelectBtn";
 import { useNavigate } from "react-router-dom";
 import { FormContext } from "./FormContext";
@@ -51,6 +51,10 @@ function Page2() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (selectedGender === null || !formData.height || !formData.weight) {
+      alert("모든 정보를 입력해주세요.");
+      return;
+    }
     navigate("/r_page3");
   };
 
@@ -90,6 +94,8 @@ function Page2() {
           placeholder={placeholderVisible ? "키를 입력하세요" : ""}
           value={formData.height}
           onChange={handleHeightChange}
+          unit="cm"
+          showDeleteButton={false} // Hide delete button for height input
         />
         <SectionText>
           몸무게
@@ -98,6 +104,8 @@ function Page2() {
           placeholder={placeholderVisible ? "몸무게를 입력하세요" : ""}
           value={formData.weight}
           onChange={handleWeightChange}
+          unit="kg"
+          showDeleteButton={false} // Hide delete button for weight input
         />
         <SubmitBtn onClick={handleSubmit}>
           다음으로
@@ -108,6 +116,10 @@ function Page2() {
 }
 
 export default Page2;
+
+const SubmitBtn = styled(OriginalSubmitBtn)`
+  margin-top: 69.2px;
+`;
 
 const BtnContainer = styled.div`
   width: 345px;
@@ -155,6 +167,6 @@ const NumberEclipse = styled(OriginalNumberEclipse)`
   font-weight: 500;
   p {
     margin: 0;
-    line-height: 19px; /* Ensure this matches the height of the Link */
+    line-height: 19px;
   }
 `;
