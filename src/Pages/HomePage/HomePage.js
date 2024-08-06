@@ -2,11 +2,22 @@ import styled from "styled-components";
 import { FlexContainer } from "../../Layout/Container"
 import InfoBoxComponent from "./Components/InfoBoxComponent";
 import BestChallengComponent from "./Components/BestChallengComponent";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MockUpBestChallengeInfo from "./Components/MockupData";
+import { getAllChallengeInfo } from "../../API/ChallengeAPI";
 
 function HomePage() {
-    const [BestChallengeInfo, setBestChallengeInfo] =  useState(MockUpBestChallengeInfo || []);
+    const [BestChallengeInfo, setBestChallengeInfo] = useState(MockUpBestChallengeInfo || []);
+    
+    useEffect(() => {
+        const getData = async () => {
+            const response = await getAllChallengeInfo(false);
+            // console.log(response.response_object); 
+            setBestChallengeInfo(response.response_object);
+        };
+
+        getData();
+    }, []);
     return (
         <HomePageContainer>
             <InfoBoxComponent/>

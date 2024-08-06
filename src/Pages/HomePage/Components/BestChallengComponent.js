@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import handleChangeGenderWord from "../../../Layout/HandleChange";
+import { Link } from "react-router-dom";
 
-function BestChallengComponent({BestChallengeInfo}) {
+function BestChallengComponent({BestChallengeInfo, to }) {
     const handleChangeDay = (date) => {
         const today = new Date();
         const challengeDate = new Date(date);
@@ -19,7 +20,7 @@ function BestChallengComponent({BestChallengeInfo}) {
         }
     }
     return (
-        <BestChallengeContainer>
+        <BestChallengeContainer to={to}>
             <BestChallengeTitle>이번주 인기 챌린지</BestChallengeTitle>
             <BestChallengeList>
                 {
@@ -28,16 +29,16 @@ function BestChallengComponent({BestChallengeInfo}) {
                             <FirstRowBox>
                                 <FirstColumnBox>
                                     {/* {challengeInfo.bestChallengeId} */}
-                                    <BestChallengeInfoTitle>{challengeInfo.bestChallengeTitle}</BestChallengeInfoTitle>
+                                    <BestChallengeInfoTitle>{challengeInfo.challenge_name}</BestChallengeInfoTitle>
                                     <TagBox>
-                                        <Tag>{challengeInfo.bestChallengeAge}대</Tag>
-                                        <Tag>{handleChangeGenderWord(challengeInfo.bestChallengeGender)}</Tag>
-                                        <Tag marginRight="0px">{challengeInfo.bestChallengeOrg}</Tag>
+                                        <Tag>{challengeInfo.challenge_age}대</Tag>
+                                        <Tag>{handleChangeGenderWord(challengeInfo.challenge_gender)}</Tag>
+                                        <Tag $marginRight="0px">{challengeInfo.challenge_org}</Tag>
                                     </TagBox>
                                 </FirstColumnBox>
                                 <SecondColumnBox>
                                     <DdayBox>
-                                        {handleChangeDay(challengeInfo.bestChallengeDate)}
+                                        {handleChangeDay(challengeInfo.challenge_end_date)}
                                     </DdayBox>
                                 </SecondColumnBox>
                             </FirstRowBox>
@@ -55,13 +56,15 @@ function BestChallengComponent({BestChallengeInfo}) {
 }
 export default BestChallengComponent;
 
-const BestChallengeContainer = styled.div`
+const BestChallengeContainer = styled(Link)`
     width: 100%;
     height : auto;
     background-color: #FFFFFF;
 
     display: flex;
     flex-direction: column;
+    text-decoration: none;
+    color : #000000;
 `;
 
 const BestChallengeTitle = styled.p`
@@ -115,6 +118,9 @@ const BestChallengeItem = styled.div`
 
     scroll-snap-align: start;
 
+    &:hover{
+        opacity: 0.5;
+    }
 `;  
 
 const BestChallengeInfoTitle = styled.p`
@@ -193,7 +199,6 @@ const TogetherCount = styled.span`
     font-weight: 500;
     line-height: 16.9px;
     letter-spacing: -0.02em;
-
     color : #FF7575;    
     margin-left: 3px;
 `;
@@ -222,7 +227,7 @@ const Tag = styled.div`
 
     padding : 3px 10px;
     box-sizing: border-box;
-    margin-right: ${props => props.marginRight || "10px"};
+    margin-right: ${props => props.$marginRight || "10px"};
     margin-bottom: 5px; // 아래쪽 마진 추가
     border-radius: 5px;
     
