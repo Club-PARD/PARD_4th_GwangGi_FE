@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {Input, Textarea} from "../../../Layout/Form";
+import {Input, Option, Select, Textarea} from "../../../Layout/Form";
 import styled from "styled-components";
 import { handlePostChallenge } from "../../../API/ChallengeAPI";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +11,8 @@ function CreatePage() {
         challenge_start_date: "",
         challenge_end_date: "-08-04T10:43:17.784Z",
         challenge_age: "",
-        challenge_org: ""
+        challenge_org: "",
+        challenge_gender : "",
     }
 
     const [newChallengeData, setNewChallengeData] = useState(challengeData);
@@ -31,9 +32,13 @@ function CreatePage() {
         try {
             if (window.confirm("챌린지를 생성하시겠습니까?")) {
                 const response = await handlePostChallenge(newChallengeData);
-                console.log(response);
-                alert("성공적으로 생성되었습니다.");
-                navigate("/home");
+                if (response && response.status === 200) {
+                    // console.log(response);
+                    alert("성공적으로 생성되었습니다.");
+                    navigate("/home");
+                } else {
+                    alert("챌린지 생성에 실패했습다. 다시 시도해주세요.");
+                }
             }
         } catch (error) {
             console.log("handleCreateChallenge fail", error);
@@ -52,6 +57,19 @@ function CreatePage() {
             <RowBox>
                 <InputTitle>챌린지 연령대</InputTitle>
                 <Input type="text" name = "challenge_age" value = {newChallengeData.challenge_age || ''} onChange={handleInputChange} placeholder="Ex) 20 ~ 30대"/>
+            </RowBox>
+            <RowBox>
+                <InputTitle>챌린지 성별</InputTitle>
+                <Select
+                    name="challenge_gender"
+                    value={newChallengeData.challenge_gender || ''}
+                    onChange={handleInputChange}
+                    required="required">
+                    <Option value="">선택하세요</Option>
+                    <Option value={0}>남성</Option>
+                    <Option value={1}>여성</Option>
+                    <Option value={2}>남녀</Option>
+                </Select>
             </RowBox>
             <RowBox>
                 <InputTitle>챌린지 장소/조직</InputTitle>
