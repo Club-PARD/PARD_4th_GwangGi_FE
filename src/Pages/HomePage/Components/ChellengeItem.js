@@ -118,7 +118,7 @@ export const DdayBox = styled.div`
     align-items: center;
 
     font-family: 'PretendardVariable';
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
     line-height: 21.48px;
     letter-spacing: -0.02em;
