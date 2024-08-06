@@ -4,22 +4,8 @@ import { useNavigate, useLocation, Link } from "react-router-dom";
 import { handleLogout } from "../API/LoginAPI";
 
 function Header() {
-    const navigate = useNavigate();
     const location = useLocation();
-    
-    const handleLogOut = async () => {
-        if (window.confirm("로그아웃 하시겠습니까?")) {
-            const response = await handleLogout();
-            if (response && response.status === 200) {
-                alert("로그아웃 되었습니다.");
-                window.sessionStorage.clear();
-                navigate("/");
-                window.location.reload();
-            } else {
-                alert("로그아웃에 실패했습니다. 다시 시도해 주세요.");
-            }
-        }
-    };
+
 
     const getCurrentPath = () => {
         const path = location.pathname;
@@ -32,7 +18,6 @@ function Header() {
 
     return (
         <div>
-            <LogOut onClick={handleLogOut}>로그아웃</LogOut>
             <HeaderContainer>
                 <LogoText to = "/home">블릿지</LogoText>
                 <MenuBox>
@@ -61,12 +46,6 @@ const LogoText = styled(Link)`
     color : #FF7575;
     text-decoration: none;
     margin-bottom: 20px;
-`;
-
-const LogOut = styled.p`
-    &:hover{
-        color : yellow;
-    }
 `;
 
 const MenuBox = styled.div`
