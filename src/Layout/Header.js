@@ -24,7 +24,7 @@ function Header() {
 
     return (
         <HeaderContainer>
-            <LogoText>블릿지</LogoText>
+            <LogoText to = "/home">블릿지</LogoText>
             <MenuBox>
                 <MenuItem to = "/home" isActive={getCurrentPath() === "home"}>홈</MenuItem>
                 <MenuItem to = "/list" isActive={getCurrentPath() === "list"}>챌린지</MenuItem>
@@ -42,14 +42,14 @@ const HeaderContainer = styled(BaseContainer)`
     padding-top: 20px;
 `;
 
-const LogoText = styled.p`
+const LogoText = styled(Link)`
     font-family: 'Y_Spotlight';
     font-size: 25px;
     font-weight: 400;
     line-height: 33px;
     text-align: left;
     color : #FF7575;
-
+    text-decoration: none;
     margin-bottom: 20px;
 `;
 
