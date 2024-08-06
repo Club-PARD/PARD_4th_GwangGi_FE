@@ -22,9 +22,13 @@ function Header() {
     };
 
     const getCurrentPath = () => {
-        const path = location.pathname.split("/").pop();
-        return path;
+        const path = location.pathname;
+        if (path.includes("detail")) {
+            return "detail";
+        }
+        return path.split("/").pop();
     };
+
 
     return (
         <div>
@@ -33,7 +37,7 @@ function Header() {
                 <LogoText to = "/home">블릿지</LogoText>
                 <MenuBox>
                     <MenuItem to = "/home" $isActive={getCurrentPath() === "home"}>홈</MenuItem>
-                    <MenuItem to = "/list" $isActive={getCurrentPath() === "list"}>챌린지</MenuItem>
+                    <MenuItem to = "/list" $isActive={getCurrentPath() === "list" || getCurrentPath() === "detail"}>챌린지</MenuItem>
                     <MenuItem to = "/mypage" $isActive={getCurrentPath() === "mypage"}>마이</MenuItem>
                 </MenuBox>
             </HeaderContainer>
