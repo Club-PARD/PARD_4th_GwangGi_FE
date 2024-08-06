@@ -30,7 +30,8 @@ function Router() {
                 path="/test"
                 element={<PrivateRoute element={<RegisterTest />} />}
             />
-            <Route element={<Layout />}> //테스트용
+            {/* 테스트용 */}
+            <Route element={<Layout />}>
                 <Route
                     path="/mypage"
                     element={<PrivateRoute element={<MyPage />} />}
