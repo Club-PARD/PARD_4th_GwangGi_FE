@@ -3,10 +3,11 @@ import {getUserAbleTo, getUserInfo} from "../../API/UserAPI";
 import styled from "styled-components";
 import getCalculateAge from "./CalculateAge";
 import {FlexContainer} from "../../Layout/Container";
-import { Input, Option, Select } from "../../Layout/Form";
 import { useNavigate } from "react-router-dom";
 import { getMyChallengeInfo } from "../../API/ChallengeAPI";
 import handleChangeGenderWord from "../../Layout/HandleChange";
+import ChallengeItem from "../../Pages/HomePage/Components/ChellengeItem";
+import { DropdownButton, DropDownImage, DropdownItem, DropdownMenu } from "../Community/ListPage/ListPage";
 
 function MyPage() {
     const [userInfo, setUserInfo] = useState({});
@@ -112,43 +113,59 @@ function MyPage() {
         else if (day > 0)
             return `${day}일 지났습니다.`
     }
+    const [view, setView] = useState(false);
+
+    const Dropdown = ({ onSelect }) => {
+        const options = [
+            { value: '1', label: '여자' },
+            { value: '0', label: '남자' }
+        ];
+
+        return (
+            <DropdownMenu onClick={() => setView(!view)}>
+                {options.map((option) => (
+                    <DropdownItem key={option.value} name="gender" onClick={() => onSelect(option.value)}>
+                        {option.label}
+                    </DropdownItem>
+                ))}
+            </DropdownMenu>
+        );
+    };
+
 
     return (
-        <div>
-            MyPage
-            <div>
+        <MyPageContainer>
+            {/* <div>
                 헌혈 가능한 일자 : {handleChangeAbleToSentnece(ableTo)} 
-            </div>
-            <UserInfoBox>
+            </div> */}
+            <ProfileContainer>
                 {
                     isEditing
                         ? (
                             <FlexContainer>
-                                <Input
+                                <input
                                     type="text"
                                     name="name"
                                     value={updateUserInfo.name || ''}
                                     onChange={handleInputChange}/>
-                                <Select
-                                    name="gender"
-                                    value={updateUserInfo.gender}
-                                    onChange={handleInputChange}>
-                                    <Option value="0">남자</Option>
-                                    <Option value="1">여자</Option>
-                                    <Option value="2">미입력</Option>
-                                </Select>
-                                <Input type="number" name="height" value={updateUserInfo.height || ''} onChange={handleInputChange} step="0.01"
+                                <DropdownButton onClick={() => setView(!view)}>
+                                    {handleChangeGenderWord(updateUserInfo.gender)}
+                                    <DropDownImage src={view ? "/Img/ListPage/DropDownUp.png" : "/Img/ListPage/DropDownDown.png"} alt="드롭다운 이미지" />
+                                </DropdownButton>
+                                {view && <Dropdown onSelect={handleInputChange} />}
+
+                                <input type="number" name="height" value={updateUserInfo.height || ''} onChange={handleInputChange} step="0.01"
                                     // 소수점 입력 허용
                                 />
-                                <Input type="number" name="weight" value={updateUserInfo.weight || ''} onChange={handleInputChange} step="0.01"
+                                <input type="number" name="weight" value={updateUserInfo.weight || ''} onChange={handleInputChange} step="0.01"
                                     // 소수점 입력 허용
                                 />
-                                <Input
+                                <input
                                     type="text"
                                     name="blood_type"
                                     value={updateUserInfo.blood_type || ''}
                                     onChange={handleInputChange}/>
-                                <Input
+                                <input
                                     type="datetime-local"
                                     name="birthday"
                                     value={updateUserInfo.birthday || ''}
@@ -156,21 +173,22 @@ function MyPage() {
                             </FlexContainer>
                         )
                         : (
-                            <div>
+                            <UserInfoContainer>
                                 <UserName>{userInfo.name}님</UserName>
-                                <UserGender>{handleChangeGenderWord(userInfo.gender)}</UserGender>
-                                <UserHeight>{userInfo.height}cm</UserHeight>
-                                <UserWeight>{userInfo.weight}kg</UserWeight>
-                                <UserBloodType>{userInfo.blood_type}형</UserBloodType>
-                                <UserBirthday>{handleCalculateAge(userInfo.birthday)}살</UserBirthday>
-                            </div>
+                                <TagBox>
+                                    <UserGender>{handleChangeGenderWord(userInfo.gender)}</UserGender>
+                                    <UserBirthday>{handleCalculateAge(userInfo.birthday)}살</UserBirthday>
+                                    <UserHeight>{userInfo.height}cm</UserHeight>
+                                    <UserWeight>{userInfo.weight}kg</UserWeight>
+                                    <UserBloodType>{userInfo.blood_type}형</UserBloodType>
+                                </TagBox>
+                            </UserInfoContainer>
                         )
                 }
-            </UserInfoBox>
-            {
+            {/* {
                 isEditing
-                    ? (
-                        <div>
+                ? (
+                    <div>
                             <UpdateUserInfoButton onClick={handleUpdateUserInfo}>
                                 저장
                             </UpdateUserInfoButton>
@@ -184,68 +202,62 @@ function MyPage() {
                             수정하기
                         </UpdateUserInfoButton>
                     )
-            }
-            <div>
-                참여 중인 챌린지
+                }  */}
+            </ProfileContainer>
+            <InfoContainer>
+                <InfoTitle>
+                    참여 중인 챌린지
+                </InfoTitle>
                 {
-                    challengeInfo.map((challengInfoData, index) => (
-                        <div key = {index}>
-                            <p>{challengInfoData.challenge_id}</p>
-                            <p>{challengInfoData.challenge_name}</p>
-                            <p>{challengInfoData.challenge_description}</p>
-                            <p>{challengInfoData.challenge_org}</p>
-                            <p>{challengInfoData.challenge_gender ? challengInfoData.challenge_gende : "남자"}</p>
-                            <p>{challengInfoData.challenge_age}</p>
-                            <p>{challengInfoData.challenge_start_date}</p>
-                            <p>{challengInfoData.challenge_end_date}</p>
-                            <br/>
-                        </div>
+                    challengeInfo.map((challengeInfo, index) => (
+                        // <ChallengeItem challengeInfo={challengeInfo} index={index} marginRight="22px" />
+                        <ChallengeItem key={index} challengeInfo={challengeInfo} index={index} width={"100%"} marginBottom={"20px"} />
                     ))
                 }
-            </div>
-        </div>
+            </InfoContainer>
+        </MyPageContainer>
     );
 }
 
-const UserInfoBox = styled.div `
-    width: 100%;
-    height : 150px;
 
-    border : 2px solid pink;
+const MyPageContainer = styled.div`
+    background-color: #ffffff;
+`;
+const UserData = styled.p`
+    font-size : 15px;
+    font-family: 'PretendardVariable';
+`;
+const UserName = styled(UserData)`
+    font-size: 25px;
+    font-weight: 700;
+    margin-bottom: 10px;
 
-    background-color: white;
-    color : black;
+`;
 
-    border-radius: 10px;
+const Tag = styled(UserData)`
+    margin-right: 5px;
 
+    background-color: #EAEAEA;
+    color : #7D7D7D;
+
+    padding : 5px 10px;
     box-sizing: border-box;
-
-    display: flex;
-    flex-direction: column;
+    border-radius: 5px;
 `;
 
-const UserName = styled.p `
-    font-size : 17px;
+const UserGender = styled(Tag)`
 `;
 
-const UserGender = styled.p `
-    font-size : 17px;
+const UserHeight = styled(Tag)`
 `;
 
-const UserHeight = styled.p `
-    font-size : 17px;
+const UserWeight = styled(Tag)`
 `;
 
-const UserWeight = styled.p `
-    font-size : 17px;
+const UserBloodType = styled(Tag)`
 `;
 
-const UserBloodType = styled.p `
-    font-size : 17px;
-`;
-
-const UserBirthday = styled.p `
-    font-size : 17px;
+const UserBirthday = styled(Tag)`
 `;
 
 const UpdateUserInfoButton = styled.button `
@@ -272,5 +284,42 @@ const CancelButton = styled.button `
     }
 `;
 
+const ProfileContainer = styled.div`
+    width: auto;
+    height : auto;
+    background-color: #f9f9f9;
+    padding : 0px 22px;
+    padding-bottom: 20px;
+    border-radius: 0px 0px 20px 20px;
+`;
+const InfoContainer = styled.div`
+    width: 100%;
+    height : auto;
+    background-color:"#ffffff";
+    padding : 20px 22px;
+    box-sizing: border-box;
+`;
 
+const InfoTitle = styled.p`
+    font-family: 'PretendardVariable';
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 23px;
+    text-align: left;
+    padding-bottom: 20px;
+`;
+
+const UserInfoContainer = styled.div`
+    width: 100%;
+    height : auto;
+    /* padding : 25px 30px; */
+    box-sizing: border-box;
+`;
+
+const TagBox = styled.div`
+    width: 100%;
+    display: flex;
+
+
+`;
 export default MyPage;
