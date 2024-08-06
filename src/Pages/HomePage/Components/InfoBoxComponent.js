@@ -32,10 +32,6 @@ function InfoBoxComponent() {
 
 export default InfoBoxComponent;
 
-const Button = styled.button`
-    width: 100px;
-    height: 30px;
-`;
 const InfoBox = styled.div`
     width: 346px;
     height : 154.49px;
