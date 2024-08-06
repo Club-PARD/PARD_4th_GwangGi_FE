@@ -13,7 +13,7 @@ export const handlePostChallenge = async (newChallengInfo) => {
                 }
             }
         );
-        console.log("handlePostChallenge success");
+        // console.log("handlePostChallenge success");
         return response.data;
     } catch (error) {
         console.log("handlePostChallenge fail", error);
@@ -34,7 +34,7 @@ export const getAllChallengeInfo = async (is_finished) => {
                 }
             }
         );
-        console.log("getAllChallengeInfo success");
+        // console.log("getAllChallengeInfo success");
         // console.log(response);
         return response.data;
     } catch (error) {
@@ -53,7 +53,7 @@ export const getSelectedChallengeInfo = async (challenge_id) => {
                 },
             }
         );
-        console.log("getSelectedChallengeInfo success");
+        // console.log("getSelectedChallengeInfo success");
         // console.log(response);
         return response.data;
     } catch (error) {
@@ -72,7 +72,7 @@ export const getMyChallengeInfo = async () => {
                 },
             }
         );
-        console.log("getMyChallengeInfo success");
+        // console.log("getMyChallengeInfo success");
         // console.log("good", response);
         return response.data;
     } catch (error) {
