@@ -23,15 +23,17 @@ function Header() {
     };
 
     return (
-        <HeaderContainer>
-            <LogoText to = "/home">블릿지</LogoText>
-            <MenuBox>
-                <MenuItem to = "/home" isActive={getCurrentPath() === "home"}>홈</MenuItem>
-                <MenuItem to = "/list" isActive={getCurrentPath() === "list"}>챌린지</MenuItem>
-                <MenuItem to = "/mypage" isActive={getCurrentPath() === "mypage"}>마이</MenuItem>
-            </MenuBox>
-            {/* <LogOut onClick={handleLogOut}>로그아웃</LogOut> */}
-        </HeaderContainer>
+        <div>
+            <LogOut onClick={handleLogOut}>로그아웃</LogOut>
+            <HeaderContainer>
+                <LogoText to = "/home">블릿지</LogoText>
+                <MenuBox>
+                    <MenuItem to = "/home" isActive={getCurrentPath() === "home"}>홈</MenuItem>
+                    <MenuItem to = "/list" isActive={getCurrentPath() === "list"}>챌린지</MenuItem>
+                    <MenuItem to = "/mypage" isActive={getCurrentPath() === "mypage"}>마이</MenuItem>
+                </MenuBox>
+            </HeaderContainer>
+        </div>
     )
 }
 
