@@ -5,6 +5,8 @@ import getCalculateAge from "./CalculateAge";
 import {FlexContainer} from "../../Layout/Container";
 import { Input, Option, Select } from "../../Layout/Form";
 import { useNavigate } from "react-router-dom";
+import { getMyChallengeInfo } from "../../API/ChallengeAPI";
+import handleChangeGenderWord from "../../Layout/HandleChange";
 
 function MyPage() {
     const [userInfo, setUserInfo] = useState({});
@@ -12,6 +14,8 @@ function MyPage() {
     const [updateUserInfo, setUpdateUserInfo] = useState({});
     const [isEditing, setIsEditing] = useState(false);
     const navigate = useNavigate();
+
+     const [challengeInfo, setChallengeInfo] = useState([]);
     
     useEffect(() => {
         const fetchData = async () => {
@@ -38,8 +42,14 @@ function MyPage() {
                 setAbleTo(response.dueDate);
             }
         }
+
+        const fetchData3 = async () => {
+            const response = await getMyChallengeInfo();
+            setChallengeInfo(response.response_object);
+        };
         fetchData();
         fetchData2();
+        fetchData3();
     }, []);
 
     const formatDate = (date) => {
@@ -51,16 +61,6 @@ function MyPage() {
         const minutes = String(d.getMinutes()).padStart(2, '0');
         return `${year}-${month}-${day}T${hours}:${minutes}`;
     };
-
-    const handleChangeGenderWord = (gender) => {
-        if (gender === 0) {
-            return "남자";
-        } else if (gender === 1) {
-            return "여자";
-        } else {
-            return "미입력";
-        }
-    }
 
     const handleCalculateAge = (birthday) => {
         const calculatedAge = getCalculateAge(birthday);
@@ -185,6 +185,24 @@ function MyPage() {
                         </UpdateUserInfoButton>
                     )
             }
+            <div>
+                참여 중인 챌린지
+                {
+                    challengeInfo.map((challengInfoData, index) => (
+                        <div key = {index}>
+                            <p>{challengInfoData.challenge_id}</p>
+                            <p>{challengInfoData.challenge_name}</p>
+                            <p>{challengInfoData.challenge_description}</p>
+                            <p>{challengInfoData.challenge_org}</p>
+                            <p>{challengInfoData.challenge_gender ? challengInfoData.challenge_gende : "남자"}</p>
+                            <p>{challengInfoData.challenge_age}</p>
+                            <p>{challengInfoData.challenge_start_date}</p>
+                            <p>{challengInfoData.challenge_end_date}</p>
+                            <br/>
+                        </div>
+                    ))
+                }
+            </div>
         </div>
     );
 }
