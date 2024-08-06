@@ -6,6 +6,7 @@ import { NumberEclipse } from "./Components/PageNum";
 import { GuideText } from "./Components/GuideText";
 import { TextBox } from "./Components/TextBox";
 import { DeleteBtn } from "./Components/DeleteBtn"; 
+import { SectionText } from "./Components/SectionText";
 
 import {handlePostRegister} from "../../API/LoginAPI";
 import {useNavigate} from "react-router-dom";
@@ -88,26 +89,20 @@ function RegisterPage() {
     return (
         <BaseContainer>
           <RegisterContainer>
-            RegisterPage
             <NumberEclipse>
-              1
+              <p>1</p>
             </NumberEclipse>
             <GuideText>
-              회원가입을 위한 <br/>
-              본인 인증이 필요해요
+              앞으로 사용하게 될  <br/>
+              닉네임을 입력해주세요
             </GuideText>
+            <SectionText>
+              닉네임
+            </SectionText>
             <TextBox
               placeholder={placeholderVisible ? "닉네임 입력" : ""}
             >
               { /*<DeleteBtn src = "/Img/RegisterPage/GrayDeleteBtn.png" alt = "삭제버튼" /> */}
-            </TextBox>
-            <TextBox
-              placeholder={placeholderVisible ? "XXXX / XX / XX" : ""}
-            >
-            </TextBox>
-            <TextBox
-              placeholder={placeholderVisible ? "통신사" : ""}
-            >
             </TextBox>
             <div>
                 <label>
