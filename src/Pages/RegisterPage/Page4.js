@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { BaseContainer } from "../../Layout/Container";
 import { RegisterContainer } from "./Components/RegisterContainer";
 import { useNavigate } from "react-router-dom";
 
-function RegisterPage() {
+function Page4() {
   const navigate = useNavigate();
 
   const goToTestPage = () => {
@@ -35,7 +35,7 @@ function RegisterPage() {
   );
 }
 
-export default RegisterPage;
+export default Page4;
 
 const FinishText = styled.div`
     color: #FF7575;
