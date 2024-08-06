@@ -4,6 +4,7 @@ export const handleLogin = async (email) => {
     try {
         const response = await axios.get(`${process.env.REACT_APP_URL}api/login`,
             {
+                withCredentials: true,
                 params: {
                     email
             }

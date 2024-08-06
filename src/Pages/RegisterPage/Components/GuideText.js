@@ -8,4 +8,9 @@ export const GuideText = styled.div`
   font-style: normal;
   font-weight: 600;
   line-height: 130%; /* 32.5px */
+
+  p {
+    color: #FF7575;
+    display: inline;
+  }
 `;

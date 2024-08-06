@@ -50,8 +50,9 @@ export default IntroPage;
 
 const Container = styled.div`
     margin-top: 47px;
-    margin-bottom: 120px;
-    width: 390px;
+    margin-bottom: 100px;
+    max-width: 390px;
+    width: 100vw;
     height: 443.776px;
     background-color: #EEEEEE;
     display: flex;
