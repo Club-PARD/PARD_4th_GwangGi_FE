@@ -186,9 +186,15 @@ const TogetherContent = styled.p`
     color : #989898;
 `;
 
-const TogetherCount = styled(TogetherContent)`
-    display: inline;
-    color : #FF7575;
+const TogetherCount = styled.span`
+
+    font-family: 'PretendardVariable';
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 16.9px;
+    letter-spacing: -0.02em;
+
+    color : #FF7575;    
     margin-left: 3px;
 `;
 
