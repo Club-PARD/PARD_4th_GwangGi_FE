@@ -32,7 +32,8 @@ function CreatePage() {
         try {
             if (window.confirm("챌린지를 생성하시겠습니까?")) {
                 const response = await handlePostChallenge(newChallengeData);
-                if (response && response.status === 200) {
+                console.log(response);
+                if (response && response.success === true) {
                     // console.log(response);
                     alert("성공적으로 생성되었습니다.");
                     navigate("/home");
