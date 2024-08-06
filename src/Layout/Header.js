@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { BaseContainer } from "./Container";
-import { Navigate, useNavigate, useLocation, Link } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import { handleLogout } from "../API/LoginAPI";
 
 function Header() {
@@ -10,10 +10,14 @@ function Header() {
     const handleLogOut = async () => {
         if (window.confirm("로그아웃 하시겠습니까?")) {
             const response = await handleLogout();
-            alert("로그아웃 되었습니다.");
-            window.sessionStorage.clear();
-            navigate("/");
-            window.location.reload();
+            if (response && response.status === 200) {
+                alert("로그아웃 되었습니다.");
+                window.sessionStorage.clear();
+                navigate("/");
+                window.location.reload();
+            } else {
+                alert("로그아웃에 실패했습니다. 다시 시도해 주세요.");
+            }
         }
     };
 
@@ -28,9 +32,9 @@ function Header() {
             <HeaderContainer>
                 <LogoText to = "/home">블릿지</LogoText>
                 <MenuBox>
-                    <MenuItem to = "/home" isActive={getCurrentPath() === "home"}>홈</MenuItem>
-                    <MenuItem to = "/list" isActive={getCurrentPath() === "list"}>챌린지</MenuItem>
-                    <MenuItem to = "/mypage" isActive={getCurrentPath() === "mypage"}>마이</MenuItem>
+                    <MenuItem to = "/home" $isActive={getCurrentPath() === "home"}>홈</MenuItem>
+                    <MenuItem to = "/list" $isActive={getCurrentPath() === "list"}>챌린지</MenuItem>
+                    <MenuItem to = "/mypage" $isActive={getCurrentPath() === "mypage"}>마이</MenuItem>
                 </MenuBox>
             </HeaderContainer>
         </div>
@@ -75,7 +79,7 @@ const MenuItem = styled(Link)`
     line-height: 32.5px;
     text-align: left;
     margin-right: 18px;
-    color: ${props => props.isActive ? '#FF7575' : '#A9A9A9'};
+    color: ${props => props.$isActive ? '#FF7575' : '#A9A9A9'};
     text-decoration: none;
     position: relative;
     display: inline-block;
@@ -85,11 +89,11 @@ const MenuItem = styled(Link)`
         position: absolute;
         bottom: -2px;
         left: 50%;
-        width: ${props => props.isActive ? '100%' : '0'};
+        width: ${props => props.$isActive ? '100%' : '0'};
         height: 2px;
         background-color: #FF7575;
         transition: width 0.5s ease, transform 0.5s ease;
-        transform: ${props => props.isActive ? 'translateX(-50%)' : 'translateX(-50%)'};
+        transform: ${props => props.$isActive ? 'translateX(-50%)' : 'translateX(-50%)'};
     }
 
     &:hover::after {

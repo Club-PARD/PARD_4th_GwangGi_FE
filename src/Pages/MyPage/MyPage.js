@@ -15,7 +15,7 @@ function MyPage() {
     const [isEditing, setIsEditing] = useState(false);
     const navigate = useNavigate();
 
-     const [challengeInfo, setChallengeInfo] = useState([]);
+    const [challengeInfo, setChallengeInfo] = useState([]);
     
     useEffect(() => {
         const fetchData = async () => {
@@ -38,7 +38,7 @@ function MyPage() {
             if (response === 500) {
                 alert("[에러] 관리자에게 문의하세요 (서버 500)")
             } else {
-                console.log(response);
+                // console.log(response);
                 setAbleTo(response.dueDate);
             }
         }
@@ -50,7 +50,7 @@ function MyPage() {
         fetchData();
         fetchData2();
         fetchData3();
-    }, []);
+    }, [navigate]);
 
     const formatDate = (date) => {
         const d = new Date(date);

@@ -11,7 +11,7 @@ export const getUserInfo = async () => {
                 }
             }
         );
-        console.log("getUserInfo success");
+        // console.log("getUserInfo success");
         return response.data.response_object;
     } catch (error) {
         console.log("getUserInfo fail", error);
@@ -30,7 +30,7 @@ export const getUserAbleTo = async () => {
                 }
             }
         );
-        console.log("getUserAbleTo success");
+        // console.log("getUserAbleTo success");
         // console.log(response);
         return response.data.response_object;
     } catch (error) {

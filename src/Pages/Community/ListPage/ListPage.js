@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { FlexContainer } from "../../../Layout/Container";
-import { ListDataMock } from "./ListDataMock";
 import { useEffect, useState } from "react";
 import { getAllChallengeInfo } from "../../../API/ChallengeAPI";
 import { Link } from "react-router-dom";
@@ -16,7 +15,7 @@ function ListPage() {
     useEffect(() => {
         const getData = async () => {
             const response = await getAllChallengeInfo(selectedPeriod);
-            console.log(response.response_object); 
+            // console.log(response.response_object); 
             setCahllengeInfo(response.response_object);
         };
 
@@ -24,11 +23,11 @@ function ListPage() {
     }, [selectedPeriod]);
 
     const handleChangeGender = (gender) => {
-        if (gender == 0)
+        if (gender === 0)
             return "남자"
-        else if (gender == 1)
+        else if (gender === 1)
             return "여자"
-        else if (gender == 2)
+        else if (gender === 2)
             return "남녀"
     }
     return (
