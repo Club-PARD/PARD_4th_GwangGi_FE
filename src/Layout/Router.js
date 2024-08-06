@@ -8,7 +8,6 @@ import DetailPage from "../Pages/Community/DetailPage/DetailPage";
 import CreatePage from "../Pages/Community/CreatePage/CreatePage";
 import SharePage from "../Pages/Community/SharePage/SharePage";
 import ShowPage from "../Pages/Community/ShowPage/ShowPage";
-import APITest from "../Test/APITest";
 import Layout from "./Layout";
 import PublicRoute from "../Layout/PublicRoute";
 import PrivateRoute from "../Layout/PrivateRoute";
@@ -92,13 +91,6 @@ function Router() {
                         }
                     />
                 </Route>
-                <Route
-                    path="/api_test"
-                    element={<PrivateRoute element = {
-                        <APITest/>
-                    } />
-                    }
-                />
             </Route>
         </Routes>
     );
