@@ -83,10 +83,6 @@ function Router() {
                             element={<PrivateRoute element={<ShowPage />} />}
                         />
                     </Route>
-                    <Route
-                        path="/api_test"
-                        element={<PrivateRoute element={<APITest />} />}
-                    />
                 </Route>
             </Routes>
         </FormProvider>
