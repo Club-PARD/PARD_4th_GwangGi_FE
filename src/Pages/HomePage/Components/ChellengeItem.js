@@ -2,26 +2,11 @@ import styled from "styled-components";
 import handleChangeGenderWord from "../../../Layout/HandleChange";
 import { Link } from "react-router-dom";
 
-function ChallengeItem({ challengeInfo, index, width, marginRight, marginBottom}) {
+function ChallengeItem({ challengeInfo, index, width, marginRight, marginBottom, backgroundColor}) {
 
-        const handleChangeDay = (date) => {
-        const today = new Date();
-        const challengeDate = new Date(date);
-        
-        // 시간 차이를 일 단위로 계산
-        const timeDiff = challengeDate.getTime() - today.getTime();
-        const dayDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
-        
-        if (dayDiff === 0) {
-            return "오늘";
-        } else if (dayDiff > 0) {
-            return `D-${dayDiff}`;
-        } else {
-            return `D+${Math.abs(dayDiff)}`;
-        }
-    }
+
     return (
-        <BestChallengeItem to={"/detail/" + challengeInfo.challenge_id} key={index} width={width} $marginRight={marginRight} $marginBottom={marginBottom}>
+        <BestChallengeItem to={"/detail/" + challengeInfo.challenge_id} key={index} width={width} $marginRight={marginRight} $marginBottom={marginBottom} $backgroundColor={backgroundColor}>
             <FirstRowBox>
                 <FirstColumnBox>
                     {/* {challengeInfo.bestChallengeId} */}
@@ -41,12 +26,28 @@ function ChallengeItem({ challengeInfo, index, width, marginRight, marginBottom}
             <SecondRowBox>
                 <PeopleImg src="/Img/HomePage/people.png"/>
                 <TogetherContent>현재
-                    <TogetherCount>{challengeInfo.bestChallengePeopleCount}명</TogetherCount>이 이 챌린지에 동참했어요!</TogetherContent>
+                    <TogetherCount>{challengeInfo.count || "N"}명</TogetherCount>이 이 챌린지에 동참했어요!</TogetherContent>
             </SecondRowBox>
         </BestChallengeItem>
     );
 }
 
+export const handleChangeDay = (date) => {
+    const today = new Date();
+    const challengeDate = new Date(date);
+    
+    // 시간 차이를 일 단위로 계산
+    const timeDiff = challengeDate.getTime() - today.getTime();
+    const dayDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+    
+    if (dayDiff === 0) {
+        return "오늘";
+    } else if (dayDiff > 0) {
+        return `D-${dayDiff}`;
+    } else {
+        return `D+${Math.abs(dayDiff)}`;
+    }
+}
 
 
 const BestChallengeItem = styled(Link)`
@@ -54,7 +55,7 @@ const BestChallengeItem = styled(Link)`
     height : auto;
 
     box-sizing: border-box;
-    background-color: #F9F9F9;  
+    background-color: ${props => props.$backgroundColor || "#F9F9F9"};  
 
     border-radius: 25px;
     flex-shrink: 0;  /* 아이템들이 줄어들지 않도록 설정 */
@@ -77,7 +78,7 @@ const BestChallengeItem = styled(Link)`
 `;  
 
 
-const BestChallengeInfoTitle = styled.p`
+export const BestChallengeInfoTitle = styled.p`
     font-family: 'PretendardVariable';
     font-size: 17px;
     font-weight: 500;
@@ -85,7 +86,7 @@ const BestChallengeInfoTitle = styled.p`
     text-align: left;
 `;
 
-const FirstRowBox = styled.div`
+export const FirstRowBox = styled.div`
     width: 100%;
     height : auto;
     display: flex;
@@ -93,13 +94,13 @@ const FirstRowBox = styled.div`
     margin-bottom: 15px;
 `;
 
-const FirstColumnBox = styled.div`
+export const FirstColumnBox = styled.div`
     flex : 8;
     height: 100%;
 
 `;
 
-const SecondColumnBox = styled.div`
+export const SecondColumnBox = styled.div`
     flex : 2;
     height: 100%;
 
@@ -107,7 +108,7 @@ const SecondColumnBox = styled.div`
     justify-content: center;
 `;
 
-const DdayBox = styled.div`
+export const DdayBox = styled.div`
     width : 46px;
     height : 46px;
     border-radius: 23px;
@@ -129,14 +130,14 @@ const DdayBox = styled.div`
 
 `;  
 
-const SecondRowBox = styled.div`
+export const SecondRowBox = styled.div`
     width: 100%;
     height : auto;
 
     display: flex;
 `;
 
-const TogetherContent = styled.p`
+export const TogetherContent = styled.p`
     font-family: 'PretendardVariable';
     font-size: 13px;
     font-weight: 500;
@@ -146,7 +147,7 @@ const TogetherContent = styled.p`
     color : #989898;
 `;
 
-const TogetherCount = styled.span`
+export const TogetherCount = styled.span`
 
     font-family: 'PretendardVariable';
     font-size: 13px;
@@ -157,18 +158,18 @@ const TogetherCount = styled.span`
     margin-left: 3px;
 `;
 
-const PeopleImg = styled.img`
+export const PeopleImg = styled.img`
     width: 15px;
     height : 15px;
     margin-right: 5px;
 `
 
-const TagBox = styled.div`
+export const TagBox = styled.div`
     width: auto;
     margin-top: 10px;
 `;
 
-const Tag = styled.div`
+export const Tag = styled.div`
     font-family: 'PretendardVariable';
     font-size: 12px;
     font-weight: 500;

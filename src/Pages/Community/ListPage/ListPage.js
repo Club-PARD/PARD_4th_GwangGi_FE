@@ -2,14 +2,14 @@ import styled from "styled-components";
 import { FlexContainer } from "../../../Layout/Container";
 import { useEffect, useState } from "react";
 import { getAllChallengeInfo } from "../../../API/ChallengeAPI";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import ChallengeItem from "../../HomePage/Components/ChellengeItem";
 
 function ListPage() {
     const [selectedPeriod, setSelectedPeriod] = useState(false);
     const [challengeInfo, setCahllengeInfo] = useState([]);
     const [view, setView] = useState(false);
-    const [selectedOption, setSelectedOption] = useState('선택하기');
+    const [selectedOption, setSelectedOption] = useState('진행중인 챌린지');
 
     const handleSelectChange = (value) => {
         setSelectedPeriod(value === 'true');
@@ -42,25 +42,26 @@ function ListPage() {
         );
     };
 
+    const navigate = useNavigate();
     return (
         <FlexContainer>
             <SelectBox>
                 <DropdownButton onClick={() => setView(!view)}>
                     {selectedOption}
-                    <DropDownImage src={view ? "/Img/ListPage/DropDownUp.png" : "/Img/ListPage/DropDownDown.png"} alt="드롭다운 이미지" />
+                    <DropDownImage src={view ? "/Img/ListPage/DropDownUp2.png" : "/Img/ListPage/DropDownDown2.png"} alt="드롭다운 이미지" />
                 </DropdownButton>
                 {view && <Dropdown onSelect={handleSelectChange} />}
-                <CreateChallengeButton to="/create">챌린지 생성하기</CreateChallengeButton>
+                {/* <CreateChallengeButton to="/create">챌린지 생성하기</CreateChallengeButton> */}
             </SelectBox>
             <ChallengeInfoContainer>
                 {challengeInfo.map((challengeInfo, index) => (
-                    <ChallengeItem key={index} challengeInfo={challengeInfo} index={index} width={"100%"} marginBottom={"20px"} />
+                    <ChallengeItem key={index} challengeInfo={challengeInfo} index={index} width={"100%"} marginBottom={"20px"} backgroundColor = "#ffffff"/>
                 ))}
             </ChallengeInfoContainer>
+            <CreateImg src = "/Img/ListPage/CreateLogo.png" alt = "챌린지 생성 이미지" onClick={() => navigate("/create")}/>
         </FlexContainer>
     );
 }
-
 const ChallengeInfoContainer = styled.div`
     width: 100%;
     height: auto;
@@ -69,7 +70,6 @@ const ChallengeInfoContainer = styled.div`
     align-items: center;
     padding: 0px 22px;
     box-sizing: border-box;
-    background-color: #ffffff;
     padding-top: 20px;
 `;
 
@@ -79,9 +79,8 @@ const SelectBox = styled.div`
     display: flex;
     padding: 0px 22px;
     box-sizing: border-box;
-    justify-content: space-between;
-    padding-top: 20px;
-    background-color: #ffffff;
+    justify-content: end;
+    background-color: #f9f9f9;
 `;
 
 const CreateChallengeButton = styled(Link)`
@@ -104,20 +103,27 @@ const CreateChallengeButton = styled(Link)`
     }
 `;
 
-const DropDownImage = styled.img`
+export const DropDownImage = styled.img`
     width: 15px;
     height: 15px;
     margin-left: 10px;
 `;
 
-const DropdownButton = styled.div`
-    width : 150px;
+export const DropdownButton = styled.div`
+    width : 130px;
     display: flex;
     align-items: center;
     cursor: pointer;
-    font-size: 16px;
-    font-family: "Pretendard Variable";
-    color: #333;
+
+    font-family: Pretendard Variable;
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 15.51px;
+    font-weight: 500;
+    
+
+    color: #000000;
+
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -126,7 +132,7 @@ const DropdownButton = styled.div`
     justify-content: space-between;
 `;
 
-const DropdownMenu = styled.ul`
+export const DropdownMenu = styled.ul`
     position: absolute;
     background-color: #fff;
     border: 1px solid #ddd;
@@ -139,15 +145,28 @@ const DropdownMenu = styled.ul`
     z-index: 1;
 `;
 
-const DropdownItem = styled.li`
+export const DropdownItem = styled.li`
     padding: 10px;
     cursor: pointer;
     font-size: 16px;
     font-family: "Pretendard Variable";
-    color: #333;
+    color: #000000;
 
     &:hover {
         background-color: #f0f0f0;
+    }
+`;
+
+const CreateImg = styled.img`
+    width: 85px;
+    height: 85px;
+    position: fixed; /* 스크롤 시에도 고정되게 */
+    bottom: 20px; /* 화면의 하단에서 20px 위에 위치 */
+    right: 20px;  /* 화면의 오른쪽에서 20px 위에 위치 */
+    z-index: 10; /* 다른 요소 위에 표시되도록 */
+
+    &:hover{
+        opacity: 0.7;
     }
 `;
 
