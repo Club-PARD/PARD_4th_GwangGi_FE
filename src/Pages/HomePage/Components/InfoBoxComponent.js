@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 function InfoBoxComponent() {
@@ -11,7 +12,7 @@ function InfoBoxComponent() {
                         <FirstSentence>자가 문진 결과</FirstSentence>
                         <SecondSentence>아직 문진 내역이 없어요</SecondSentence>
                     </SubRowBox>
-                    <TestBox>문진하기</TestBox>
+                    <TestBox to = "/test">문진하기</TestBox>
                 </RowBox>
             </InfoBox>
             <InfoBox>
@@ -104,7 +105,7 @@ const SecondSentence = styled.p`
     color : #6A6A6A;
 `;
 
-const TestBox = styled.button`
+const TestBox = styled(Link)`
     width: 64.57px;
     height: 32.9px;
     border-radius: 7px;
@@ -112,10 +113,19 @@ const TestBox = styled.button`
 
     border : none;
 
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     font-family: 'PretendardVariable';
     font-size: 13px;
     font-weight: 500;
     line-height: 16.9px;
     text-align: center;
     color : #FFFFFF;
+
+    &:hover{
+        opacity: 0.8;
+    }
 `;
