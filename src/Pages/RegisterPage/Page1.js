@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
+import styled from "styled-components";
 import { BaseContainer } from "../../Layout/Container";
 import { RegisterContainer } from "./Components/RegisterContainer";
 import { NumberEclipse } from "./Components/PageNum";
 import { GuideText } from "./Components/GuideText";
 import TextBox from "./Components/TextBox"; // Ensure this is the correct import path
 import { SectionText } from "./Components/SectionText";
-import { SubmitBtn } from "./Components/SubmitBtn";
+import { SubmitBtn as OriginalSubmitBtn } from "./Components/SubmitBtn"; // 원래 SubmitBtn 가져오기
 import { useNavigate } from "react-router-dom";
 import { FormContext } from "./FormContext";
 
@@ -27,20 +28,20 @@ function Page1() {
     const handleNicknameChange = (e) => {
         setFormData({
             ...formData,
-            nickname: e.target.value
+            name: e.target.value
         });
     };
 
     const handleNicknameDelete = () => {
         setFormData({
             ...formData,
-            nickname: ''
+            name: ''
         });
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (!formData.nickname) {
+        if (!formData.name) {
             alert("닉네임을 입력해주세요.");
             return;
         }
@@ -61,7 +62,7 @@ function Page1() {
                 </SectionText>
                 <TextBox
                     placeholder={placeholderVisible ? "닉네임 입력" : ""}
-                    value={formData.nickname}  // Updated to formData.nickname
+                    value={formData.name}  // Updated to formData.nickname
                     onChange={handleNicknameChange}
                     onDelete={handleNicknameDelete}
                 />
@@ -74,3 +75,8 @@ function Page1() {
 }
 
 export default Page1;
+
+const SubmitBtn = styled(OriginalSubmitBtn)`
+  margin-top: 331px;
+  margin-bottom: 29px;
+`;

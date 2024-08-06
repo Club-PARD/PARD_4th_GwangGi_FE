@@ -10,9 +10,8 @@ const TextBoxWrapper = styled.div`
 const StyledTextBox = styled.input`
   width: 284px;
   height: 71px;
-  //padding-top: 24px;
   padding-left: 18.3px;
-  padding-right: 40px; /* Add padding to make space for the delete button */
+  padding-right: ${({ showDeleteButton }) => (showDeleteButton ? '40px' : '18.3px')}; /* Adjust padding based on delete button */
   flex-shrink: 0;
   border-radius: 15px;
   border: 1.5px solid #E7E7E7;
@@ -53,15 +52,30 @@ const DeleteButton = styled.button`
   background-repeat: no-repeat;
 `;
 
-function TextBox({ placeholder, value, onChange, onDelete }) {
+const UnitLabel = styled.span`
+  position: absolute;
+  top: 50%;
+  right: 24px;
+  transform: translateY(-50%);
+  font-family: "Pretendard Variable";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 130%; /* 23.4px */
+  color: #BCBCBC;
+`;
+
+function TextBox({ placeholder, value, onChange, onDelete, showDeleteButton = true, unit }) {
   return (
     <TextBoxWrapper>
       <StyledTextBox
         placeholder={placeholder}
         value={value}
         onChange={onChange}
+        showDeleteButton={showDeleteButton}
       />
-      <DeleteButton onClick={onDelete} />
+      {showDeleteButton && <DeleteButton onClick={onDelete} />}
+      {unit && <UnitLabel>{unit}</UnitLabel>}
     </TextBoxWrapper>
   );
 }

@@ -19,4 +19,6 @@ export const SubmitBtn = styled.button`
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+
+  cursor: pointer;
 `;

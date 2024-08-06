@@ -2,11 +2,10 @@ import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import { BaseContainer } from "../../Layout/Container";
 import { RegisterContainer } from "./Components/RegisterContainer";
-import { NumberEclipse } from "./Components/PageNum";
+import { NumberEclipse as OriginalNumberEclipse } from "./Components/PageNum";
 import { GuideText } from "./Components/GuideText";
-import TextBox from "./Components/TextBox"; // Ensure this is the correct import path
 import { SectionText } from "./Components/SectionText";
-import { SubmitBtn } from "./Components/SubmitBtn";
+import { SubmitBtn as OriginalSubmitBtn } from "./Components/SubmitBtn";
 import { SelectBtn } from "./Components/SelectBtn";
 import { useNavigate } from "react-router-dom";
 import { FormContext } from "./FormContext";
@@ -38,6 +37,11 @@ function Page3() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (selectedBloodType === null || selectedRHFactor === null) {
+      alert("혈액형과 Rh 인자를 모두 선택해주세요.");
+      return;
+    }
 
     const bloodTypes = ["A", "B", "O", "AB"];
     const rhFactors = ["+", "-"];
@@ -71,11 +75,14 @@ function Page3() {
   return (
     <BaseContainer>
       <RegisterContainer>
-        <NumberEclipse>
-          <p>3</p>
-        </NumberEclipse>
+        <Return>
+          <NumberEclipse>
+            <p>3</p>
+          </NumberEclipse>
+          <Link onClick={() => navigate("/r_page2")}>이전</Link>
+        </Return>
         <GuideText>
-        안전한 헌혈을 위해 <br/><p>정확한 혈액형</p>을 입력해주세요
+          안전한 헌혈을 위해 <br/><p>정확한 혈액형</p>을 입력해주세요
         </GuideText>
         <SectionText>
           혈액형
@@ -94,7 +101,7 @@ function Page3() {
             B형
           </SelectBtn>
         </BtnContainer>
-        <BtnContainer>
+        <BtnContainer3>
           <SelectBtn
             onClick={() => handleBloodTypeChange(2)}
             selected={selectedBloodType === 2}
@@ -107,8 +114,7 @@ function Page3() {
           >
             AB형
           </SelectBtn>
-        </BtnContainer>
-    
+        </BtnContainer3>
         <SectionText>
           유형
         </SectionText>
@@ -145,6 +151,15 @@ const BtnContainer = styled.div`
   gap: 12.31px;
 `;
 
+const BtnContainer3 = styled.div`
+  width: 345px;
+  height: 55px;
+  margin-bottom: 35px;
+  display: flex;
+  flex-direction: row;
+  gap: 12.31px;
+`;
+
 const BtnContainer2 = styled.div`
   width: 345px;
   height: 55px;
@@ -153,3 +168,47 @@ const BtnContainer2 = styled.div`
   flex-direction: row;
   gap: 12.31px;
 `;
+
+const Return = styled.div`
+  width: 390px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const Link = styled.span`
+  cursor: pointer;
+  color: #ABABAB;
+  text-align: center;
+  font-family: "Pretendard Variable";
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  margin-top: 72px;
+  margin-right: 42px;
+`;
+
+const NumberEclipse = styled(OriginalNumberEclipse)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #FF7575;
+  color: #FFF;
+  font-family: "Pretendard Variable";
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  p {
+    margin: 0;
+    line-height: 19px;
+  }
+`;
+
+const SubmitBtn = styled(OriginalSubmitBtn)`
+  margin-top: 165px;
+  margin-bottom: 29px;
+`
