@@ -64,7 +64,7 @@ function Router() {
                         }
                     />
                     <Route
-                        path="/detail"
+                        path="/detail/:challenge_id"
                         element={<PrivateRoute element = {
                             <DetailPage/>
                         } />
