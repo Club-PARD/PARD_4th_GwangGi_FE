@@ -79,3 +79,25 @@ export const getMyChallengeInfo = async () => {
         console.log("getMyChallengeInfo fail", error);
     }
 }
+
+export const postJoinChellenge = async (challenge_id) => {
+    try {
+        const response = await axios.post(
+            `${process.env.REACT_APP_URL}api/challenge/join`,
+            {
+                withCredentials: true,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                params: {
+                    challenge_id : challenge_id,
+                }
+            }
+        );
+        // console.log("postJoinChellenge success");
+        console.log(response);
+        // return response.data;
+    } catch (error) {
+        console.log("postJoinChellenge fail", error);
+    }
+}

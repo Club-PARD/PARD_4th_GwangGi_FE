@@ -15,5 +15,5 @@ export const FlexContainer = styled.div`
     height : auto;
 
     display:  flex;
-    flex-direction: ${props => props.flexDirection || "column"};
+    flex-direction: ${props => props.$flexDirection || "column"};
 `;
