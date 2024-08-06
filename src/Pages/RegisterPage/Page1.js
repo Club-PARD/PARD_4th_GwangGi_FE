@@ -1,28 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { BaseContainer } from "../../Layout/Container";
 import { RegisterContainer } from "./Components/RegisterContainer";
-
 import { NumberEclipse } from "./Components/PageNum";
 import { GuideText } from "./Components/GuideText";
 import TextBox from "./Components/TextBox"; // Ensure this is the correct import path
 import { SectionText } from "./Components/SectionText";
 import { SubmitBtn } from "./Components/SubmitBtn";
-
-import { handlePostRegister } from "../../API/LoginAPI";
 import { useNavigate } from "react-router-dom";
+import { FormContext } from "./FormContext";
 
 function Page1() {
     const navigate = useNavigate();
-
-    const [formData, setFormData] = useState({
-        email: '', name: '', birthday: '', gender: '',
-        height: '',
-        weight: '',
-        blood_type: '',
-        last_donation_date: '',
-        nickname: ''
-    });
-
+    const { formData, setFormData } = useContext(FormContext);
     const [placeholderVisible, setPlaceholderVisible] = useState(true);
 
     useEffect(() => {
@@ -33,16 +22,7 @@ function Page1() {
                 email: storedEmail
             }));
         }
-    }, []);
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        const newValue = name === 'gender' ? parseInt(value, 10) : value;
-        setFormData({
-            ...formData,
-            [name]: newValue
-        });
-    };
+    }, [setFormData]);
 
     const handleNicknameChange = (e) => {
         setFormData({
@@ -58,37 +38,13 @@ function Page1() {
         });
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-
-        const form = e.target;
-        if (!form.checkValidity()) {
-            form.reportValidity();
+        if (!formData.nickname) {
+            alert("닉네임을 입력해주세요.");
             return;
         }
-
-        const transformedData = {
-            ...formData,
-            height: parseFloat(formData.height),
-            weight: parseFloat(formData.weight)
-        };
-
-        if (window.confirm("등록하시겠습니까?")) {
-            console.log(transformedData);
-            try {
-                const response = await handlePostRegister(transformedData);
-                if (response.response_object._new_user === false) {
-                    alert("등록되었습니다.");
-                    navigate("/home");
-                } else {
-                    alert("이미 등록된 유저입니다.");
-                    navigate("/");
-                }
-            } catch (error) {
-                console.error("등록 중 오류 발생:", error);
-                alert("등록 실패. 다시 시도해 주세요.");
-            }
-        }
+        navigate("/r_page2");
     };
 
     return (
@@ -105,11 +61,11 @@ function Page1() {
                 </SectionText>
                 <TextBox
                     placeholder={placeholderVisible ? "닉네임 입력" : ""}
-                    value={formData.nickname}
+                    value={formData.nickname}  // Updated to formData.nickname
                     onChange={handleNicknameChange}
                     onDelete={handleNicknameDelete}
                 />
-                <SubmitBtn>
+                <SubmitBtn onClick={handleSubmit}>
                     다음으로
                 </SubmitBtn>
             </RegisterContainer>

@@ -1,6 +1,7 @@
-import {Route, Routes} from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import IntroPage from "../Pages/IntroPage/IntroPage";
 import RegisterPage from "../Pages/RegisterPage/RegisterPage";
+import TestPage from "../Pages/TestPage/TestPage";
 import MyPage from "../Pages/MyPage/MyPage";
 import HomePage from "../Pages/HomePage/HomePage";
 import ListPage from "../Pages/Community/ListPage/ListPage";
@@ -13,94 +14,83 @@ import Layout from "./Layout";
 import PublicRoute from "../Layout/PublicRoute";
 import PrivateRoute from "../Layout/PrivateRoute";
 import BaseLayout from "../Layout/BaseLayout";
-import RegisterTest from "../Pages/RegisterPage/RegisterTest";
+
+import { FormProvider } from "../Pages/RegisterPage/FormContext";
+import Page1 from "../Pages/RegisterPage/Page1";
+import Page2 from "../Pages/RegisterPage/Page2";
+import Page3 from "../Pages/RegisterPage/Page3";
+import Page4 from "../Pages/RegisterPage/Page4";
 
 function Router() {
     return (
-        <Routes>
-            <Route element={<BaseLayout />}>
-
-                <Route
-                    path="/"
-                    element={<PublicRoute element = {
-                        <IntroPage/>
-                    } />
-                    }
-                />
-                <Route
-                    path="/register"
-                    element={<PrivateRoute element = {
-                        <RegisterPage/>
-                    } />
-                    }
-                />
-                <Route
-                    path="/test"
-                    element={<PrivateRoute element = {
-                        <RegisterTest/>
-                    } />
-                    }
-                /> {/* 테스트용 */}
-                <Route element={<Layout />}>
+        <FormProvider>
+            <Routes>
+                <Route element={<BaseLayout />}>
                     <Route
-                        path="/mypage"
-                        element={<PrivateRoute element = {
-                            <MyPage/>
-                        } />
-                        }
+                        path="/"
+                        element={<PublicRoute element={<IntroPage />} />}
                     />
                     <Route
-                        path="/home"
-                        element={<PrivateRoute element = {
-                            <HomePage/>
-                        } />
-                        }
+                        path="/register"
+                        element={<PrivateRoute element={<RegisterPage />} />}
                     />
                     <Route
-                        path="/list"
-                        element={<PrivateRoute element = {
-                            <ListPage/>
-                        } />
-                        }
-                    />
+                        path="/r_page1"
+                        element={<PrivateRoute element={<Page1 />} />}
+                    /> {/* 테스트용 */}
                     <Route
-                        path="/detail/:challenge_id"
-                        element={<PrivateRoute element = {
-                            <DetailPage/>
-                        } />
-                        }
-                    />
+                        path="/r_page2"
+                        element={<PrivateRoute element={<Page2 />} />}
+                    /> {/* 테스트용 */}
                     <Route
-                        path="/create"
-                        element={<PrivateRoute element = {
-                            <CreatePage/>
-                        } />
-                        }
-                    />
+                        path="/r_page3"
+                        element={<PrivateRoute element={<Page3 />} />}
+                    /> {/* 테스트용 */}
                     <Route
-                        path="/share"
-                        element={<PrivateRoute element = {
-                            <SharePage/>
-                        } />
-                        }
-                    />
+                        path="/r_page4"
+                        element={<PrivateRoute element={<Page4 />} />}
+                    /> {/* 테스트용 */}
                     <Route
-                        path="/show"
-                        element={<PrivateRoute element = {
-                            <ShowPage/>
-                        } />
-                        }
+                        path="/test"
+                        element={<PrivateRoute element={<TestPage />} />}
+                    />
+                    <Route element={<Layout />}>
+                        <Route
+                            path="/mypage"
+                            element={<PrivateRoute element={<MyPage />} />}
+                        />
+                        <Route
+                            path="/home"
+                            element={<PrivateRoute element={<HomePage />} />}
+                        />
+                        <Route
+                            path="/list"
+                            element={<PrivateRoute element={<ListPage />} />}
+                        />
+                        <Route
+                            path="/detail/:challenge_id"
+                            element={<PrivateRoute element={<DetailPage />} />}
+                        />
+                        <Route
+                            path="/create"
+                            element={<PrivateRoute element={<CreatePage />} />}
+                        />
+                        <Route
+                            path="/share"
+                            element={<PrivateRoute element={<SharePage />} />}
+                        />
+                        <Route
+                            path="/show"
+                            element={<PrivateRoute element={<ShowPage />} />}
+                        />
+                    </Route>
+                    <Route
+                        path="/api_test"
+                        element={<PrivateRoute element={<APITest />} />}
                     />
                 </Route>
-                <Route
-                    path="/api_test"
-                    element={<PrivateRoute element = {
-                        <APITest/>
-                    } />
-                    }
-                />
-            </Route>
-        </Routes>
+            </Routes>
+        </FormProvider>
     );
 }
 

@@ -15,7 +15,7 @@ const GoogleLoginButton = ({ navigate }) => {
             const is_new_user = response.data.response_object._new_user;
             if (is_new_user === true) {
                 alert("신규 회원입니다.");
-                navigate("/register");
+                navigate("/r_page1");
             } else {
                 alert("기존 회원입니다.");
                 navigate("/home");
