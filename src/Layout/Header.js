@@ -30,16 +30,16 @@ function Header() {
                 <MenuItem to = "/list" isActive={getCurrentPath() === "list"}>챌린지</MenuItem>
                 <MenuItem to = "/mypage" isActive={getCurrentPath() === "mypage"}>마이</MenuItem>
             </MenuBox>
-            <LogOut onClick={handleLogOut}>로그아웃</LogOut>
+            {/* <LogOut onClick={handleLogOut}>로그아웃</LogOut> */}
         </HeaderContainer>
     )
 }
 
 const HeaderContainer = styled(BaseContainer)`
-    height : 110px;
+    height : 130px;
     padding : 0px 22px;
     box-sizing: border-box;
-    background-color: pink;
+    padding-top: 20px;
 `;
 
 const LogoText = styled.p`
@@ -69,17 +69,37 @@ const MenuBox = styled.div`
 const MenuItem = styled(Link)`
     font-family: 'PretendardVariable';
     font-size: 25px;
-    font-weight: 700;
+    font-weight: 600;
     line-height: 32.5px;
     text-align: left;
     margin-right: 18px;
     color: ${props => props.isActive ? '#FF7575' : '#A9A9A9'};
-
     text-decoration: none;
+    position: relative;
+    display: inline-block;
 
-    &:hover{
-        color : #FF7575;
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 50%;
+        width: ${props => props.isActive ? '100%' : '0'};
+        height: 2px;
+        background-color: #FF7575;
+        transition: width 0.5s ease, transform 0.5s ease;
+        transform: ${props => props.isActive ? 'translateX(-50%)' : 'translateX(-50%)'};
+    }
+
+    &:hover::after {
+        width: 100%;
+        transform: translateX(-50%);
+    }
+
+    &:hover {
+        color: #FF7575;
     }
 `;
+
+
 
 export default Header;
