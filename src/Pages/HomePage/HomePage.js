@@ -3,11 +3,10 @@ import { FlexContainer } from "../../Layout/Container"
 import InfoBoxComponent from "./Components/InfoBoxComponent";
 import BestChallengComponent from "./Components/BestChallengComponent";
 import { useEffect, useState } from "react";
-import MockUpBestChallengeInfo from "./Components/MockupData";
 import { getAllChallengeInfo } from "../../API/ChallengeAPI";
 
 function HomePage() {
-    const [BestChallengeInfo, setBestChallengeInfo] = useState(MockUpBestChallengeInfo || []);
+    const [BestChallengeInfo, setBestChallengeInfo] = useState([]);
     
     useEffect(() => {
         const getData = async () => {
