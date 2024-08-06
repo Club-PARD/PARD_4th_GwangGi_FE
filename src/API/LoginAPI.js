@@ -9,7 +9,7 @@ export const handleLogin = async (email) => {
                     email
             }
             });
-        console.log(response);
+        // console.log(response);
         return response;
     } catch (error) {
         console.error('Error during login request:', error);
@@ -19,25 +19,12 @@ export const handleLogin = async (email) => {
 export const handleLogout = async () => {
     try {
         const response = await axios.delete(`${process.env.REACT_APP_URL}api/cookie/delete`);
-        console.log(response);
-        console.log("logout success");
+        // console.log(response);
+        // console.log("logout success");
+        return response;
     } catch (error) {
         console.error('logout fail', error);
     }    
-}
-
-export const handleTest = async () => {
-
-    try {
-        const response = await axios.get(
-            `${process.env.REACT_APP_URL}api/test`,
-            {withCredentials: true}
-        );
-        console.log(response);
-        console.log("api test success");
-    } catch (error) {
-        console.error("api test fail", error);
-    }
 }
 
 export const handlePostRegister = async (newUserInfo) => {
@@ -53,7 +40,7 @@ export const handlePostRegister = async (newUserInfo) => {
                 }
             }
         );
-        console.log("handlePostRegsiter success");
+        // console.log("handlePostRegsiter success");
         return response.data;
     } catch (error) {
         console.log("handlePostRegsiter fail", error);
