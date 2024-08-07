@@ -12,7 +12,7 @@ export const BaseContainer = styled.div`
 
 export const FlexContainer = styled.div`
     width: 100%;
-    height : auto;
+    height : ${props => props.height || "auto"};
 
     display:  flex;
     flex-direction: ${props => props.$flexDirection || "column"};
