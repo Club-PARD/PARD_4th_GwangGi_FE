@@ -1,3 +1,4 @@
+
 import styled from "styled-components";
 
 export const D_Blood = styled.button`
@@ -12,6 +13,7 @@ export const D_Blood = styled.button`
   align-items: center;
   justify-content: flex-start;
   margin-bottom: 16px;
+  position: relative; /* Added to position info icon */
 
   p {
     color: #000;
@@ -21,5 +23,13 @@ export const D_Blood = styled.button`
     font-weight: 500;
     line-height: 130%; /* 23.4px */
     margin-left: 16px;
+  }
+
+  img {
+    width: 19px;
+    height: 19px;
+    position: absolute;
+    right: 16px; /* Adjust this value to position the icon correctly */
+    cursor: pointer;
   }
 `;
