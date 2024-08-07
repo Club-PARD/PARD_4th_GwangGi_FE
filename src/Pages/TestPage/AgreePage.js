@@ -6,11 +6,19 @@ import { QBtn } from "./Components/QBtn";
 import StyledRadioButton from "./Components/StyledRadioButton";
 import { SubmitBtn } from "../RegisterPage/Components/SubmitBtn";
 import styled from 'styled-components';
+import { useNavigate } from "react-router-dom";
 
 function AgreePage() {
     const [selectedValue, setSelectedValue] = useState('');
     const [currentPage, setCurrentPage] = useState(0);
     const [selectedButton, setSelectedButton] = useState(null);
+
+    const navigate = useNavigate();
+
+    const handleSubmit = () => {
+        navigate('/test_fail');
+        
+    };
 
     const handleButtonClick = (buttonNumber) => {
         setSelectedButton(buttonNumber);
@@ -51,7 +59,7 @@ function AgreePage() {
                         onChange={handleChange}
                     />
                 </QBtn>
-                <SubmitBtn>다음으로</SubmitBtn>
+                <SubmitBtn onClick={handleSubmit}>결과보기</SubmitBtn>
             </TestrContainer>
         </BaseContainer>
     );

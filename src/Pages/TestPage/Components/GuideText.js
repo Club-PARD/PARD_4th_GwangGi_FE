@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const GuideText = styled.div`
-  margin-top: 77px;
+  margin-top: 21px;
   color: #000;
   font-family: "Pretendard Variable";
   font-size: 25px;

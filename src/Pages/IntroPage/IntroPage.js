@@ -11,6 +11,9 @@ import { SubmitBtn } from "../../Layout/SubmitBtn";
 
 function IntroPage() {
     const navigate = useNavigate();
+    const handleSubmit = () => {
+        navigate('/test_alert');
+    };
 
     const settings = {
         arrows: false,
@@ -39,7 +42,7 @@ function IntroPage() {
                 </Container>
             </MySlider>
             <GoogleLoginButton navigate={navigate} />
-            <StyledSubmitBtn>
+            <StyledSubmitBtn onClick={handleSubmit}> 
                 자가문진 바로가기
             </StyledSubmitBtn>
         </CenteredBaseContainer>

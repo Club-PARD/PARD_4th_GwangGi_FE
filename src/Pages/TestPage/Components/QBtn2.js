@@ -1,16 +1,16 @@
 import styled from "styled-components";
 
-export const QBtn = styled.div`
+export const QBtn2 = styled.div`
   width: 345px;
-  height: auto;
+  height: 71px;
   flex-shrink: 0;
   margin-bottom: 12px;
 
 border-radius: 15px;
-border: 1.5px solid #E7E7E7;
-background: #FFF;
+border: 1.5px solid #fff;
+background: #FF7575;
 
-color: #000;
+color: #fff;
 font-family: "Pretendard Variable";
 font-size: 18px;
 font-style: normal;

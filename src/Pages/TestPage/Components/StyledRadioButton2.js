@@ -12,7 +12,7 @@ const RadioButton = styled.input.attrs({ type: 'checkbox' })`
   position: relative;
 
   &:checked {
-    border-color: #FF7575;
+    border-color: #fff;
   }
 
   &:checked::before {
@@ -20,7 +20,7 @@ const RadioButton = styled.input.attrs({ type: 'checkbox' })`
     display: block;
     width: 12px;
     height: 12px;
-    background: #FF7575;
+    background: #fff;
     border-radius: 50%;
     position: absolute;
     top: 50%;
@@ -32,7 +32,6 @@ const RadioButton = styled.input.attrs({ type: 'checkbox' })`
 const Label = styled.label`
   margin-top: 25px;
   margin-left: 18px;
-  margin-bottom: 25px;
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -42,11 +41,11 @@ const Text = styled.span`
   margin-left: 17px;
 `;
 
-const StyledRadioButton = ({ label, checked, onChange, value }) => (
+const StyledRadioButton2 = ({ label, checked, onChange, value }) => (
   <Label>
     <RadioButton checked={checked} onChange={() => onChange(value)} />
     <Text>{label}</Text>
   </Label>
 );
 
-export default StyledRadioButton;
+export default StyledRadioButton2;

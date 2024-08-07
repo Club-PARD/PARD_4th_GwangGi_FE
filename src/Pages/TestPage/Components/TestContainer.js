@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const TestrContainer = styled.div`
-    width: 346px;
+    width: 349px;
     height : auto;
     background-color: #fff;
     

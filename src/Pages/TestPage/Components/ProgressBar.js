@@ -21,7 +21,7 @@ const ProgressBar = ({ currentPage, totalBars = 12 }) => {
   return (
     <ProgressBarContainer>
       {Array.from({ length: totalBars }).map((_, index) => (
-        <Bar key={index} active={index === currentPage} />
+        <Bar key={index} active={index <= currentPage} />
       ))}
     </ProgressBarContainer>
   );

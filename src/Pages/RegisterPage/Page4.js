@@ -8,7 +8,7 @@ function Page4() {
   const navigate = useNavigate();
 
   const goToTestPage = () => {
-    navigate(`/test`);
+    navigate(`/test_alert`);
   };
 
   const goToHomePage = () => {
