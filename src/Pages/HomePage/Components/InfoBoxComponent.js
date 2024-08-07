@@ -13,7 +13,7 @@ function InfoBoxComponent({ navigate }) {
                         <FirstSentence>자가 문진 결과</FirstSentence>
                         <SecondSentence>아직 문진 내역이 없어요</SecondSentence>
                     </SubRowBox>
-                    <TestBox to = "/test">문진하기</TestBox>
+                    <TestBox to = "/test_alert">문진하기</TestBox>
                 </RowBox>
             </InfoBox>
             <InfoBox>
