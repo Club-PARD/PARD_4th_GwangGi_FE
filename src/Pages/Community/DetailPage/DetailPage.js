@@ -1,36 +1,39 @@
 import { useEffect, useState } from "react";
 import { getSelectedChallengeInfo, postJoinChellenge } from "../../../API/ChallengeAPI";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import handleChangeGenderWord from "../../../Layout/HandleChange";
 import { FlexContainer } from "../../../Layout/Container";
 import styled from "styled-components";
-import { BestChallengeInfoTitle, DdayBox, FirstColumnBox, FirstRowBox, handleChangeDay, PeopleImg, SecondColumnBox, SecondRowBox, Tag, TagBox, TogetherContent, TogetherCount } from "../../HomePage/Components/ChellengeItem";
+import { BestChallengeInfoTitle, DdayBox, FirstColumnBox, FirstRowBox, handleChangeDay, PeopleImg, SecondColumnBox, SecondRowBox, Tag, TagBox, TogetherContent, TogetherCount } from "../../HomePage/Components/ChellengeItemCP";
 function DetailPage() {
     
     const [challengeInfo, setChallengeInfo] = useState({});
     const { challenge_id } = useParams(); // 경로 변수 추출
 
 
+    const naviate = useNavigate();
+
     useEffect(() => {
         const getData = async () => {
             const response = await getSelectedChallengeInfo(challenge_id);
             // console.log(response); 
-            setChallengeInfo(response.response_object);
+            if (response?.response_object?.challenge_user_joined === true) {
+                naviate("/show/" + challenge_id);
+            } else {
+                setChallengeInfo(response.response_object);
+            }
         };
         getData();
     }, [challenge_id]);
 
-    const formatDate = (dateString) => {
-        if (!dateString) return "";
-        const date = new Date(dateString);
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const day = String(date.getDate()).padStart(2, '0');
-        return `${year}.${month}.${day}`;
-    };
+    
     
     const handleJoinChallenge = async () => {
         const response = await postJoinChellenge(challenge_id);
+        if (response?.success === true) {
+            alert("챌린지 동참이 성공적으로 되었습니다.");
+            naviate("/show/" + challenge_id);
+        }
     }  
     
 
@@ -84,14 +87,25 @@ function DetailPage() {
     )
 }
 
-export const BackContainerComponent = ({text, path}) => {
-        return (
-            <BackContainer to={path}>
-                <BackImg src="/Img/DetailPage/Back.png" alt="뒤로가기" />
-                <BackContent>{text}</BackContent>
-            </BackContainer>
-        );
-    }
+export const formatDate = (dateString) => {
+        if (!dateString) return "";
+        const date = new Date(dateString);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}.${month}.${day}`;
+};
+    
+export const BackContainerComponent = ({text}) => {
+    const naviate = useNavigate();
+
+    return (
+        <BackContainer onClick={() => naviate(-1)}>
+            <BackImg src="/Img/DetailPage/Back.png" alt="뒤로가기" />
+            <BackContent>{text}</BackContent>
+        </BackContainer>
+    );
+}
 
 const BackImg = styled.img`
     width : 7.77px;
@@ -109,7 +123,7 @@ const BackContent = styled.p`
 
 `;
 
-const BackContainer = styled(Link)`
+const BackContainer = styled.div`
     display: flex;
     padding: 0px 22px;
     padding-left: 30px;
