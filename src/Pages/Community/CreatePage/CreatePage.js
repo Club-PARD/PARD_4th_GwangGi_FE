@@ -35,7 +35,7 @@ function CreatePage() {
                 console.log(response);
                 if (response && response.success === true) {
                     alert("성공적으로 생성되었습니다.");
-                    navigate("/home");
+                    navigate("/list");
                 } else {
                     alert("챌린지 생성에 실패했습니다. 다시 시도해주세요.");
                 }

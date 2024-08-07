@@ -16,7 +16,7 @@ function ShowPage() {
     useEffect(() => {
         const getData = async () => {
             const response = await getSelectedChallengeInfo(challenge_id);
-            console.log(response.response_object); 
+            // console.log(response.response_object); 
             setChallengeInfo(response.response_object);
             calculateTotalDonations(response.response_object.user);
         };

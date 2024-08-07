@@ -9,7 +9,7 @@ function BestChallengComponent({ BestChallengeInfo, navigate }) {
             <BestChallengeList>
                 {
                     BestChallengeInfo.map((challengeInfo, index) => (
-                        <ChallengeItem navigate={navigate} challengeInfo={challengeInfo} index={index} marginRight="22px" />
+                        <ChallengeItem navigate={navigate} challengeInfo={challengeInfo} key ={index} marginRight="22px" />
                     ))
                 }
             </BestChallengeList>
