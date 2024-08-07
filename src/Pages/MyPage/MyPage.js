@@ -38,6 +38,7 @@ function MyPage() {
 
         const fetchData2 = async () => {
             const response = await getUserAbleTo();
+            // console.log(response);
             if (response.response_object === null || response.response_object === undefined) {
                 // alert("헌혈 내역이 없습니다.");
                 console.log("헌혈 내역이 없습니다.");
@@ -216,7 +217,7 @@ function MyPage() {
                 {
                     challengeInfo.map((challengeInfo, index) => (
                         // <ChallengeItem challengeInfo={challengeInfo} index={index} marginRight="22px" />
-                        <ChallengeItem key={index} challengeInfo={challengeInfo} index={index} width={"100%"} marginBottom={"20px"} />
+                        <ChallengeItem key={index} navigate = {navigate} challengeInfo={challengeInfo} index={index} width={"100%"} marginBottom={"20px"} />
                     ))
                 }
             </InfoContainer>
