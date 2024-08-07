@@ -78,11 +78,11 @@ function Router() {
                             path="/share"
                             element={<PrivateRoute element={<SharePage />} />}
                         />
-                        <Route
-                            path="/show"
-                            element={<PrivateRoute element={<ShowPage />} />}
-                        />
                     </Route>
+                    <Route
+                        path="/show/:challenge_id"
+                        element={<PrivateRoute element={<ShowPage />} />}
+                    />
                 </Route>
             </Routes>
         </FormProvider>

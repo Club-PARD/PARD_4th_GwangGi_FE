@@ -37,8 +37,8 @@ function HomePage() {
     };
     return (
         <HomePageContainer>
-            <InfoBoxComponent/>
-            <BestChallengComponent BestChallengeInfo={BestChallengeInfo} />
+            <InfoBoxComponent navigate={navigate} />
+            <BestChallengComponent navigate={navigate } BestChallengeInfo={BestChallengeInfo} />
             {/* <Button onClick={getUserInfo}>테스트</Button> */}
             {/* <Link to="/mypage">마이 페이지</Link> */}
             <LogOutButton onClick={handleLogOut}>로그아웃</LogOutButton>
