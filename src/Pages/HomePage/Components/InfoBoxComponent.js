@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-function InfoBoxComponent() {
+function InfoBoxComponent({ navigate }) {
+
     return (
         <div>
             <InfoBox>
@@ -16,7 +17,7 @@ function InfoBoxComponent() {
                 </RowBox>
             </InfoBox>
             <InfoBox>
-                <InfoTitle>헌혈증 등록</InfoTitle>
+                <InfoTitle>헌혈 기록</InfoTitle>
                 <RowBox>
                     <Img src="/Img/HomePage/Card.png" alt="자가문진 테스트 이미지" />
                     <SubRowBox>
@@ -24,7 +25,7 @@ function InfoBoxComponent() {
                         <SecondSentence>등록하고 생명 판자 받기</SecondSentence>
                     </SubRowBox>
                     {/* <TestBox>문진하기</TestBox> */}
-                    <RightImg src = "/Img/HomePage/Right.png" alt=  "오른쪽 이미지" width = "9px"/>
+                    <RightImg src="/Img/HomePage/Right.png" alt="오른쪽 이미지" width="9px" onClick={() => navigate("/share") } />
                 </RowBox>
             </InfoBox>
         </div>
@@ -76,6 +77,10 @@ const RightImg = styled.img`
     width: 9px;
 
     margin-left: 37px;
+
+    &:hover{
+        opacity: 0.5;
+    }
 `
 
 const SubRowBox = styled.div`
