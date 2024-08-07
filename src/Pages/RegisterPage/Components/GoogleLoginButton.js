@@ -1,7 +1,10 @@
-import {GoogleLogin} from "@react-oauth/google";
-import {GoogleOAuthProvider} from "@react-oauth/google";
-import {jwtDecode} from "jwt-decode";
-import {handleLogin} from "../../../API/LoginAPI";
+import React from 'react';
+import { GoogleLogin } from "@react-oauth/google";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
+import { handleLogin } from "../../../API/LoginAPI";
+import styled from "styled-components";
+
 const GoogleLoginButton = ({ navigate }) => {
     const handleSuccess = async (res) => {
         try {
@@ -25,17 +28,49 @@ const GoogleLoginButton = ({ navigate }) => {
             console.error("로그인 처리 중 오류 발생:", error);
         }
     };
+
     return (
-        <div>
+        <StyledGoogleLoginWrapper>
             <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
-                <GoogleLogin
+                <StyledGoogleLoginButton
                     onSuccess={handleSuccess}
                     onFailure={(err) => {
                         console.log(err);
-                    }}/>
+                    }}
+                />
             </GoogleOAuthProvider>
-        </div>
+        </StyledGoogleLoginWrapper>
     );
 };
 
 export default GoogleLoginButton;
+
+const StyledGoogleLoginWrapper = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    padding: 10px;
+    border: 2px solid #4285F4;
+    border-radius: 5px;
+    margin: 20px 0;
+    cursor: pointer;
+`;
+
+const StyledGoogleLoginButton = styled(GoogleLogin)`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    background-color: #4285F4;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    &:hover {
+        background-color: #357ae8;
+    }
+`;
