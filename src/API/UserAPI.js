@@ -12,7 +12,8 @@ export const getUserInfo = async () => {
             }
         );
         // console.log("getUserInfo success");
-        return response.data.response_object;
+        console.log(response.data);
+        return response.data;
     } catch (error) {
         console.log("getUserInfo fail", error);
         return 500;
@@ -31,8 +32,8 @@ export const getUserAbleTo = async () => {
             }
         );
         // console.log("getUserAbleTo success");
-        // console.log(response);
-        return response.data.response_object;
+        // console.log("after", response);
+        return response.data;
     } catch (error) {
         console.log("getUserAbleTo fail", error);
         return 500;
