@@ -20,6 +20,7 @@ function ListPage() {
         const getData = async () => {
             const response = await getAllChallengeInfo(selectedPeriod);
             setCahllengeInfo(response.response_object);
+            // console.log(response);
         };
 
         getData();
@@ -55,14 +56,14 @@ function ListPage() {
             </SelectBox>
             <ChallengeInfoContainer>
                 {challengeInfo.map((challengeInfo, index) => (
-                    <ChallengeItem key={index} challengeInfo={challengeInfo} index={index} width={"100%"} marginBottom={"20px"} backgroundColor = "#ffffff"/>
+                    <ChallengeItem key={index} navigate={navigate} challengeInfo={challengeInfo} index={index} width={"100%"} marginBottom={"20px"} backgroundColor = "#ffffff" />
                 ))}
             </ChallengeInfoContainer>
             <CreateImg src = "/Img/ListPage/CreateLogo.png" alt = "챌린지 생성 이미지" onClick={() => navigate("/create")}/>
         </FlexContainer>
     );
 }
-const ChallengeInfoContainer = styled.div`
+export const ChallengeInfoContainer = styled.div`
     width: 100%;
     height: auto;
     display: flex;
@@ -157,7 +158,7 @@ export const DropdownItem = styled.li`
     }
 `;
 
-const CreateImg = styled.img`
+export const CreateImg = styled.img`
     width: 85px;
     height: 85px;
     position: fixed; /* 스크롤 시에도 고정되게 */

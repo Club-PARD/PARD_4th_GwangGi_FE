@@ -2,14 +2,14 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import ChallengeItem from "./ChellengeItem";
 
-function BestChallengComponent({ BestChallengeInfo }) {
+function BestChallengComponent({ BestChallengeInfo, navigate }) {
     return (
         <BestChallengeContainer>
             <BestChallengeTitle>이번주 인기 챌린지</BestChallengeTitle>
             <BestChallengeList>
                 {
                     BestChallengeInfo.map((challengeInfo, index) => (
-                        <ChallengeItem challengeInfo={challengeInfo} index={index} marginRight="22px" />
+                        <ChallengeItem navigate={navigate} challengeInfo={challengeInfo} index={index} marginRight="22px" />
                     ))
                 }
             </BestChallengeList>
