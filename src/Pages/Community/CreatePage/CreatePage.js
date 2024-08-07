@@ -91,7 +91,7 @@ function CreatePage() {
 
     return (
         <FlexContainer>
-            <BackContainerComponent text="뒤로가기" />
+            <BackContainerComponent text="뒤로가기" path = "/list"/>
             <InputContainer>
                 <RowBox>
                     <InputTitle>챌린지 명</InputTitle>
@@ -205,12 +205,12 @@ function CreatePage() {
     );
 }
 
-const InputContainer = styled.div`
+export const InputContainer = styled.div`
     margin: 0px 22px;
     box-sizing: border-box;
 `;
 
-const InputTitle = styled.p`
+export const InputTitle = styled.p`
     font-family: Pretendard Variable;
     font-size: 13px;
     font-weight: 600;
@@ -221,13 +221,13 @@ const InputTitle = styled.p`
     margin-bottom: 5px;
 `;
 
-const RowBox = styled.div`
+export const RowBox = styled.div`
     display: flex;
     flex-direction: column;
     margin-bottom: 15px;
 `;
 
-const Input = styled.input`
+export const Input = styled.input`
     width: auto;
     height: 51.82px;
     border: 1.5px solid #E7E7E7;
@@ -250,7 +250,7 @@ const Input = styled.input`
     }
 `;
 
-const TextArea = styled.textarea`
+export const TextArea = styled.textarea`
     width: auto;
     height: 80px;
     border: 1.5px solid #E7E7E7;
@@ -274,12 +274,12 @@ const TextArea = styled.textarea`
     }
 `;
 
-const SelectBox = styled.div`
+export const SelectBox = styled.div`
     position: relative;
     width: auto;
 `;
 
-const DropdownButton = styled.div`
+export const DropdownButton = styled.div`
     width: 130px;
     display: flex;
     align-items: center;
@@ -295,7 +295,7 @@ const DropdownButton = styled.div`
     justify-content: space-between;
 `;
 
-const DropdownMenu = styled.ul`
+export const DropdownMenu = styled.ul`
     position: absolute;
     background-color: #fff;
     border: 1px solid #ddd;
@@ -307,7 +307,7 @@ const DropdownMenu = styled.ul`
     z-index: 1;
 `;
 
-const DropdownItem = styled.li`
+export const DropdownItem = styled.li`
     padding: 10px;
     cursor: pointer;
     font-size: 14px;
@@ -319,13 +319,13 @@ const DropdownItem = styled.li`
     }
 `;
 
-const DropDownImage = styled.img`
+export const DropDownImage = styled.img`
     width: 15px;
     height: 15px;
     margin-left: 10px;
 `;
 
-const CreateButton = styled(JoinButton)`
+export const CreateButton = styled(JoinButton)`
     cursor: pointer;
     transition: background-color 0.3s ease;
 
