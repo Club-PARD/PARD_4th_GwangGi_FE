@@ -21,23 +21,28 @@ function MyPage() {
     useEffect(() => {
         const fetchData = async () => {
             const response = await getUserInfo();
-            if (response === 500) {
-                alert("[에러] 관리자에게 문의하세요 (서버 500)")
-                window.sessionStorage.clear();
-                navigate("/");
+
+            if (response.response_object === null || response.response_object === undefined) {
+                alert("유저 정보가 없습니다.");
+            } else if (response === 500) {
+                alert("[에러] 관리자에게 문의하세요 (서버 500) /  getUserInfo")
             } else {
-                setUserInfo(response);
+                // console.log(response);
+                setUserInfo(response.response_object);
                 setUpdateUserInfo({
-                    ...response,
-                    birthday: formatDate(response.birthday) // birthday 초기값 설정
+                    ...response.response_object,
+                    birthday: formatDate(response.response_object.birthday) // birthday 초기값 설정
                 });
             }
         }
 
         const fetchData2 = async () => {
             const response = await getUserAbleTo();
-            if (response === 500) {
-                alert("[에러] 관리자에게 문의하세요 (서버 500)")
+            if (response.response_object === null || response.response_object === undefined) {
+                // alert("헌혈 내역이 없습니다.");
+                console.log("헌혈 내역이 없습니다.");
+            } else if (response === 500) {
+                alert("[에러] 관리자에게 문의하세요 (서버 500) / getUserAbleTo")
             } else {
                 // console.log(response);
                 setAbleTo(response.dueDate);
