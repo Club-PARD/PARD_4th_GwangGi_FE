@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { BaseContainer } from "./Container";
 import { useNavigate, useLocation, Link } from "react-router-dom";
-import { handleLogout } from "../API/LoginAPI";
+
 
 function Header() {
     const location = useLocation();

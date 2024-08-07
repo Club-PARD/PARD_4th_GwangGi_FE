@@ -1,0 +1,45 @@
+├── README.md // Repository README 설명
+├── firebase.json 
+├── package-lock.json
+├── package.json
+├── public
+│   ├── Img
+│   │   ├── DetailPage
+│   │   ├── HomePage
+│   │   ├── IntroPage
+│   │   ├── ListPage
+│   │   ├── RegisterPage
+│   │   └── Test
+│   ├── favicon.ico
+│   ├── index.html
+│   ├── logo192.png
+│   ├── logo512.png
+│   ├── manifest.json
+│   └── robots.txt
+├── src
+│   ├── API // 서버와 통신에 필요한 API 모음
+│   ├── App.css
+│   ├── App.js
+│   ├── App.test.js
+│   ├── Layout // 레이아웃 또는 자주 사용하는 파일들 모음
+│   ├── Pages
+│   │   ├── Community
+│   │   │   ├── CreatePage // 챌린지 생성하는 페이지
+│   │   │   ├── DetailPage // 챌린지 세부 내용 보여주는 페이지
+│   │   │   ├── ListPage // 챌린지 전체 리스트를 보여주는 페이지
+│   │   │   ├── SharePage // 헌혈 후 인증하는 페이지
+│   │   │   └── ShowPage // 자신이 속해 있는 챌린지에 대한 정보를 보여준다. (MyPage로 대체 예정)
+│   │   ├── HomePage // 메인 페이지
+│   │   ├── IntroPage // 온보딩 페이지
+│   │   ├── MyPage // 나의 정보를 보는 마이페이지
+│   │   ├── RegisterPage // 회원가입 페이지
+│   │   └── TestPage 
+│   ├── Style
+│   │   ├── Font // 폰트 적용을 위한 파일
+│   │   └── theme.js // 스타일 통일화를 위한 파일
+│   ├── index.css
+│   ├── index.js
+│   ├── logo.svg
+│   ├── reportWebVitals.js
+│   └── setupTests.js
+└── 구조.txt
