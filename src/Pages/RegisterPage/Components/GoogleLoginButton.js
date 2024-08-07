@@ -51,7 +51,6 @@ const StyledGoogleLoginWrapper = styled.div`
     align-items: center;
     width: 200px;
     padding: 10px;
-    border: 2px solid #4285F4;
     border-radius: 5px;
     margin: 20px 0;
     cursor: pointer;
