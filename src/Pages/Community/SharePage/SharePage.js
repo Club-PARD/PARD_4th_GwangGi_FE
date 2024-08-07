@@ -75,7 +75,7 @@ function SharePage() {
 
     return (
         <FlexContainer height = "660px">
-            <BackContainerComponent text="뒤로가기" path="/home" />
+            <BackContainerComponent text="뒤로가기"/>
             <InputContainer>
                 <RowBox>
                     <InputTitle>헌혈 날짜</InputTitle>

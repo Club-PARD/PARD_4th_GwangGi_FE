@@ -91,7 +91,7 @@ function CreatePage() {
 
     return (
         <FlexContainer>
-            <BackContainerComponent text="뒤로가기" path = "/list"/>
+            <BackContainerComponent text="뒤로가기"/>
             <InputContainer>
                 <RowBox>
                     <InputTitle>챌린지 명</InputTitle>
