@@ -21,7 +21,7 @@ function Header() {
             <HeaderContainer>
                 <LogoText to = "/home">블릿지</LogoText>
                 <MenuBox>
-                    <MenuItem to = "/home" $isActive={getCurrentPath() === "home"}>홈</MenuItem>
+                    <MenuItem to = "/home" $isActive={getCurrentPath() === "home" | getCurrentPath() === "share"}>홈</MenuItem>
                     <MenuItem to = "/list" $isActive={getCurrentPath() === "list" || getCurrentPath() === "detail"}>챌린지</MenuItem>
                     <MenuItem to = "/mypage" $isActive={getCurrentPath() === "mypage"}>마이</MenuItem>
                 </MenuBox>

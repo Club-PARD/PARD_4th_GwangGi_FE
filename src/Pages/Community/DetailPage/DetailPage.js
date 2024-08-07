@@ -36,7 +36,7 @@ function DetailPage() {
 
     return (
         <FlexContainer>
-            <BackContainerComponent text = "목록보기"/>            
+            <BackContainerComponent text = "목록보기" path = "/list"/>            
             <ChallengeDetailContainer>    
                 {/* <p>챌린지 설명 : {challengeInfo.challenge_description}</p>
                 <p>챌린지 조직/장소 : {challengeInfo.challenge_org}</p>
@@ -84,9 +84,9 @@ function DetailPage() {
     )
 }
 
-export const BackContainerComponent = ({text}) => {
+export const BackContainerComponent = ({text, path}) => {
         return (
-            <BackContainer to="/list">
+            <BackContainer to={path}>
                 <BackImg src="/Img/DetailPage/Back.png" alt="뒤로가기" />
                 <BackContent>{text}</BackContent>
             </BackContainer>
