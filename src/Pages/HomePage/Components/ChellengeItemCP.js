@@ -93,8 +93,8 @@ export const DdayBox = styled.div`
     line-height: 21.48px;
     letter-spacing: -0.02em;
     text-align: center;
-    background-color: ${({ challengeEndDate }) => {
-        const dayString = handleChangeDay(challengeEndDate);
+    background-color: ${({ $challengeEndDate }) => {
+        const dayString = handleChangeDay($challengeEndDate);
         if (dayString.includes("D-")) {
             const daysLeft = parseInt(dayString.split("D-")[1], 10);
             return '#FF7575'; // 기본 색상
@@ -113,7 +113,7 @@ export const SecondRowBox = styled.div`
     height : auto;
 
     display: flex;
-    flex-direction: ${props => props.flexDirection};
+    flex-direction: ${props => props.$flexDirection};
 `;
 
 

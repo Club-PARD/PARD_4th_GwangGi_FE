@@ -5,7 +5,7 @@ import { getSelectedChallengeInfo } from "../../../API/ChallengeAPI";
 import { formatDate } from "../../Community/DetailPage/DetailPage";
 import { BestChallengeInfoTitle, BestChallengeItem, DdayBox, FirstColumnBox, FirstRowBox, handleChangeDay, PeopleImg, SecondColumnBox, SecondRowBox, Tag, TagBox, TogetherContent, TogetherCount } from "./ChellengeItemCP";
 
-function ChallengeItem({ version, navigate, challengeInfo, index, width, marginRight, marginBottom, backgroundColor}) {
+function ChallengeItem({ version, navigate, challengeInfo, width, marginRight, marginBottom, backgroundColor}) {
 
     const handleCheckJoined = () => {
         const getData = async () => {
@@ -20,7 +20,7 @@ function ChallengeItem({ version, navigate, challengeInfo, index, width, marginR
     }
 // to={"/detail/" + challengeInfo.challenge_id} 
     return (
-        <BestChallengeItem key={index} width={width} $marginRight={marginRight} $marginBottom={marginBottom} $backgroundColor={backgroundColor} onClick={handleCheckJoined}>
+        <BestChallengeItem width={width} $marginRight={marginRight} $marginBottom={marginBottom} $backgroundColor={backgroundColor} onClick={handleCheckJoined}>
             <FirstRowBox>
                 <FirstColumnBox>
                     {/* {challengeInfo.bestChallengeId} */}
@@ -32,7 +32,7 @@ function ChallengeItem({ version, navigate, challengeInfo, index, width, marginR
                     </TagBox>
                 </FirstColumnBox>
                 <SecondColumnBox>
-                    <DdayBox challengeEndDate={challengeInfo.challenge_end_date}>
+                    <DdayBox $challengeEndDate={challengeInfo.challenge_end_date}>
                         {handleChangeDay(challengeInfo.challenge_end_date)}
                     </DdayBox>
                 </SecondColumnBox>
@@ -40,7 +40,7 @@ function ChallengeItem({ version, navigate, challengeInfo, index, width, marginR
             {
                 version === false
                     ? 
-                        <SecondRowBox flexDirection = "column">
+                        <SecondRowBox $flexDirection = "column">
                             <Period>챌린지 기간</Period>
                             <PeriodData>
                                 {formatDate(challengeInfo.challenge_start_date)} ~ {formatDate(challengeInfo.challenge_end_date)}
@@ -49,7 +49,6 @@ function ChallengeItem({ version, navigate, challengeInfo, index, width, marginR
                     : 
                         <SecondRowBox>
                             <PeopleImg src="/Img/HomePage/people.png"/>
-                            {console.log(challengeInfo)}
                             <TogetherContent>현재
                                 <TogetherCount>{challengeInfo.user_count || "N"}명</TogetherCount>이 이 챌린지에 동참했어요!</TogetherContent>
                         </SecondRowBox>
