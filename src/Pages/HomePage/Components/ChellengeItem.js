@@ -26,7 +26,7 @@ function ChallengeItem({ version, navigate, challengeInfo, width, marginRight, m
                     {/* {challengeInfo.bestChallengeId} */}
                     <BestChallengeInfoTitle>{challengeInfo.challenge_name}</BestChallengeInfoTitle>
                     <TagBox>
-                        <Tag>{challengeInfo.challenge_age}대</Tag>
+                        <Tag>{challengeInfo.challenge_age}</Tag>
                         <Tag>{handleChangeGenderWord(challengeInfo.challenge_gender)}</Tag>
                         <Tag $marginRight="0px">{challengeInfo.challenge_org}</Tag>
                     </TagBox>

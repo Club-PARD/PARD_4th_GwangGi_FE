@@ -21,8 +21,8 @@ function InfoBoxComponent({ navigate }) {
                 <RowBox>
                     <Img src="/Img/HomePage/Card.png" alt="자가문진 테스트 이미지" />
                     <SubRowBox>
-                        <FirstSentence>판자를 모아, 생명 다리를 만들어요</FirstSentence>
-                        <SecondSentence>등록하고 생명 판자 받기</SecondSentence>
+                        <FirstSentence>헌혈내용 기록과 공유로 동기부여 하기!</FirstSentence>
+                        <SecondSentence>기록하고 팀원들과 공유하기 </SecondSentence>
                     </SubRowBox>
                     {/* <TestBox>문진하기</TestBox> */}
                     <RightImg src="/Img/HomePage/Right.png" alt="오른쪽 이미지" width="9px" onClick={() => navigate("/share") } />
