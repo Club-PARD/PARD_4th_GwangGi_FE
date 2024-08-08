@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate, useLocation } from "react-router-dom";
 import { BaseContainer } from "../../Layout/Container";
 import { SubmitBtn } from "../RegisterPage/Components/SubmitBtn";
+import { getUserAbleTo } from '../../API/UserAPI';
 
 function Result_fail() {
     const [selectedValue, setSelectedValue] = useState('');
@@ -55,6 +56,26 @@ function Result_fail() {
     ];
 
     const nonNullReasons = reasons.filter(reason => responseData?.response_object?.reason[reason.key]);
+    
+    const [ableTo, setAbleTo] = useState(); 
+    useEffect(() => {
+        const fetchData2 = async () => {
+            const response = await getUserAbleTo();
+            // console.log(response);
+            if (response?.response_object === null || response?.response_object === undefined) {
+                // alert("헌혈 내역이 없습니다.");
+                console.log("헌혈 내역이 없습니다.");
+                setAbleTo(null);
+            } else if (response === 500) {
+                alert("[에러] 관리자에게 문의하세요 (서버 500) / getUserAbleTo")
+            } else {
+                // console.log(response.response_object.dueDate);
+                setAbleTo(response.response_object.dueDate);
+            }
+        }
+        fetchData2();
+    }, []);
+
 
     return (
         <BaseContainer>
@@ -87,10 +108,7 @@ function Result_fail() {
                         <Line />
                         <ScrollContainer>
                             <R_Date>
-                                작성자님의 <p>마지막 헌혈 날짜</p>는<br />
-                                {responseData?.response_object?.last_donation_date 
-                                    ? formatDate(responseData.response_object.last_donation_date) 
-                                    : '알 수 없음'} 입니다.
+                                작성자님의 <p>마지막 헌혈 날짜</p>로부터<br /> 가능한 날짜까지 남은 시간들이 존재합니다.
                             </R_Date>
                             <TextContent>
                                 {bloodTypeReason && (
@@ -99,11 +117,17 @@ function Result_fail() {
                                         <p>{bloodTypeReason[1]}</p>
                                     </BloodTypeReason>
                                 )}
-                                {dueDate && (
+                                {dueDate ? (
                                     <DueDate>
                                         <HighlightedText>{dueDate}</HighlightedText><p>일 후</p>에 헌혈을 할 수 있습니다.
                                     </DueDate>
-                                )}
+                                ) : (
+                                    <DueDate>
+                                        <HighlightedText>{ableTo}</HighlightedText><p>일 후</p>에 헌혈을 할 수 있습니다.
+                                    </DueDate>
+                                )
+                              }
+                                
                                 <Line2 />
                                 {nonNullReasons.map((reason, index) => (
                                     <React.Fragment key={reason.key}>
@@ -146,7 +170,7 @@ const Img = styled.img`
 `;
 
 const Img2 = styled.img`
-  width: 200px;
+  width: auto;
   height: 64.407px;
   flex-shrink: 0;
   margin-bottom: 20px;
