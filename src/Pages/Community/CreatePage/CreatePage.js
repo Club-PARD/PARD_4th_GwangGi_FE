@@ -270,9 +270,9 @@ export const TextArea = styled.textarea`
     padding: 10px;
     box-sizing: border-box;
     font-family: 'PretendardVariable';
-    font-size: 15px;
+    font-size: 13px;
     font-weight: 500;
-    line-height: 19.5px;
+    line-height: 16.5px;
     text-align: left;
     outline: none;
     resize: none;

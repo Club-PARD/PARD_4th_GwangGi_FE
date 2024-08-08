@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {getUserAbleTo, getUserInfo} from "../../API/UserAPI";
+import {getUserInfo} from "../../API/UserAPI";
 import styled from "styled-components";
 import getCalculateAge from "./CalculateAge";
 import {FlexContainer} from "../../Layout/Container";
@@ -12,7 +12,7 @@ import { getBloodTypeImage } from "../Community/ShowPage/ShowPage";
 
 function MyPage() {
     const [userInfo, setUserInfo] = useState({});
-    const [ableTo, setAbleTo] = useState();
+
     const [updateUserInfo, setUpdateUserInfo] = useState({});
     const [isEditing, setIsEditing] = useState(false);
     const navigate = useNavigate();
@@ -39,26 +39,11 @@ function MyPage() {
             }
         }
 
-        const fetchData2 = async () => {
-            const response = await getUserAbleTo();
-            // console.log(response);
-            if (response?.response_object === null || response?.response_object === undefined) {
-                // alert("헌혈 내역이 없습니다.");
-                console.log("헌혈 내역이 없습니다.");
-            } else if (response === 500) {
-                alert("[에러] 관리자에게 문의하세요 (서버 500) / getUserAbleTo")
-            } else {
-                // console.log(response);
-                setAbleTo(response.dueDate);
-            }
-        }
-
         const fetchData3 = async () => {
             const response = await getMyChallengeInfo();
             setChallengeInfo(response?.response_object);
         };
         fetchData();
-        fetchData2();
         fetchData3();
     }, [navigate]);
 

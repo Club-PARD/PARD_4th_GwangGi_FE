@@ -16,7 +16,7 @@ function ShowPage() {
     useEffect(() => {
         const getData = async () => {
             const response = await getSelectedChallengeInfo(challenge_id);
-            // console.log(response.response_object); 
+            console.log(response.response_object); 
             setChallengeInfo(response.response_object);
             calculateTotalDonations(response.response_object.user);
         };
@@ -43,7 +43,7 @@ function ShowPage() {
     return (
         <ShowPageContainer>
             <HeaderBackPage>
-                <BackImg src="/Img/DetailPage/Back.png" alt="뒤로가기" onClick={() => navigate(-1)}/>
+                <BackImg src="/Img/DetailPage/Back.png" alt="뒤로가기" onClick={() => navigate("/list")}/>
                 <Title>챌린지 그룹 <PeopleCount>{challengeInfo?.user?.length}</PeopleCount></Title>
             </HeaderBackPage>
             
