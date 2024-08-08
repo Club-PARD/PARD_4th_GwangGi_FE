@@ -38,6 +38,7 @@ function Result_fail() {
     };
 
     const bloodTypeReason = formatBloodTypeReason(responseData?.response_object?.reason?.blood_type_reason);
+    
     const dueDate = responseData?.response_object?.reason?.due_date;
 
     const reasons = [
@@ -146,7 +147,6 @@ const Img = styled.img`
 `;
 
 const Img2 = styled.img`
-  width: 200px;
   height: 64.407px;
   flex-shrink: 0;
   margin-bottom: 20px;

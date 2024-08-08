@@ -223,8 +223,9 @@ const Line = styled.div`
   height: 2px;
   flex-shrink: 0;
   background-color: #EDEDED;
-  margin-left: 18px
+  margin-left: 18px;
 `;
+
 const Line2 = styled.div`
   width: 306px;
   height: 2px;
