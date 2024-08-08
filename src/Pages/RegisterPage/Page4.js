@@ -1,114 +1,186 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import { BaseContainer } from "../../Layout/Container";
 import { RegisterContainer } from "./Components/RegisterContainer";
+import { NumberEclipse as OriginalNumberEclipse } from "./Components/PageNum";
+import { GuideText } from "./Components/GuideText";
+import { SectionText } from "./Components/SectionText";
+import { SubmitBtn as OriginalSubmitBtn } from "./Components/SubmitBtn";
 import { useNavigate } from "react-router-dom";
+import { FormContext } from "./FormContext";
+import CalendarModal from "../TestPage/Components/CalendarModal";
+import { handlePostRegister } from "../../API/LoginAPI"; // Import the API call
 
 function Page4() {
   const navigate = useNavigate();
+  const { formData, setFormData } = useContext(FormContext);
+  const [birthday, setBirthday] = useState(formData.birthday || "");
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 
-  const goToTestPage = () => {
-    navigate(`/test_alert`);
+  useEffect(() => {
+    const storedEmail = sessionStorage.getItem('user_email');
+    if (storedEmail) {
+      setFormData(prevFormData => ({
+        ...prevFormData,
+        email: storedEmail
+      }));
+    }
+  }, [setFormData]);
+
+  const openCalendar = () => {
+    setIsCalendarOpen(true);
   };
 
-  const goToHomePage = () => {
-    navigate(`/home`);
+  const closeCalendar = () => {
+    setIsCalendarOpen(false);
+  };
+
+  const handleDateChange = (date) => {
+    const formattedDate = date.toISOString().split('T')[0]; // Format the date as YYYY-MM-DD
+    setBirthday(formattedDate);
+    setFormData({
+      ...formData,
+      birthday: formattedDate
+    });
+    setIsCalendarOpen(false);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!birthday) {
+      alert("생년월일을 입력해주세요.");
+      return;
+    }
+
+    const transformedData = {
+      ...formData,
+      birthday: birthday
+    };
+
+    if (window.confirm("등록하시겠습니까?")) {
+      try {
+        const response = await handlePostRegister(transformedData);
+        if (response.response_object._new_user === false) {
+          alert("등록되었습니다.");
+          navigate("/home");
+        } else {
+          alert("이미 등록된 유저입니다.");
+          navigate("/");
+        }
+      } catch (error) {
+        console.error("등록 중 오류 발생:", error);
+        alert("등록 실패. 다시 시도해 주세요.");
+      }
+    }
   };
 
   return (
     <BaseContainer>
       <RegisterContainer>
-        <FinishText>
-            회원가입이 완료 되었어요!
-        </FinishText>
+        <Return>
+          <NumberEclipse>
+            <p>4</p>
+          </NumberEclipse>
+          <Link onClick={() => navigate("/r_page3")}>이전</Link>
+        </Return>
         <GuideText>
-          우리가 만들어가는 생명의 다리, <br/><p>블릿지</p>에 가입하신 것을 환영해요!
+          <p>생년월일</p>을 <br/>입력해주세요
         </GuideText>
-        <TestBtn onClick = {goToTestPage}>
-          자가문진 바로가기
-        </TestBtn>
-        <HomeBtn onClick = {goToHomePage}>
-          홈으로
-        </HomeBtn>
+        <SectionText>
+          생년월일
+        </SectionText>
+        <DateContainer>
+          <DateText isDateSelected={!!birthday}>
+            {birthday ? new Date(birthday).toLocaleDateString() : 'XXXX / XX / XX'}
+          </DateText>
+          <CalendarButton onClick={openCalendar}>
+            <img src="Img/TestPage/calendar-icon.png" alt="calendar icon" />
+          </CalendarButton>
+        </DateContainer>
+        <SubmitBtn onClick={handleSubmit}>
+          완료하기
+        </SubmitBtn>
       </RegisterContainer>
+      {isCalendarOpen && <CalendarModal onClose={closeCalendar} onDateChange={handleDateChange} />}
     </BaseContainer>
   );
 }
 
 export default Page4;
 
-const FinishText = styled.div`
-    color: #FF7575;
-    text-align: center;
-    font-family: "Pretendard Variable";
-    font-size: 13px;
-    font-style: normal;
-    font-weight: 600;   
-    line-height: 130%; /* 16.9px */
-    margin-top: 288.45px;
-    margin-bottom: 10px;
-`
-
-const GuideText = styled.div`
-    color: #000;
-    text-align: center;
-    font-family: "Pretendard Variable";
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 130%; /* 26px */
-
-    p {
-        color: #FF7575;
-        display: inline;
-    }
-`
-
-const TestBtn = styled.button`
-  display: flex;
-  width: 346px;
-  height: 60px;
-  padding: 19px 108px;
-  border: none;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  flex-shrink: 0;
-  border-radius: 100px;
-  background: #FF7575;
-  margin-top: 188px;
-  margin-bottom: 8px;
-
-  color: #FFF;
-  font-family: "Pretendard Variable";
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-
-  cursor: pointer;
+const SubmitBtn = styled(OriginalSubmitBtn)`
+  margin-top: 69.2px;
 `;
 
-const HomeBtn = styled.button`
+const Return = styled.div`
+  width: 390px;
   display: flex;
-  width: 346px;
-  height: 60px;
-  padding: 19px 108px;
-  border: 1.5px solid #E3E3E3;
-  justify-content: center;
+  flex-direction: row;
   align-items: center;
-  gap: 10px;
-  flex-shrink: 0;
-  border-radius: 100px;
-  background: #fff;
-  margin-bottom: 28.95px;
+  justify-content: space-between;
+`;
 
-  color: #000;
+const Link = styled.span`
+  cursor: pointer;
+  color: #ABABAB;
+  text-align: center;
+  font-family: "Pretendard Variable";
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  margin-top: 72px;
+  margin-right: 42px;
+`;
+
+const NumberEclipse = styled(OriginalNumberEclipse)`
+  width: 19px;
+  height: 19px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #FF7575;
+  color: #FFF;
+  font-family: "Pretendard Variable";
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  p {
+    margin: 0;
+    line-height: 19px;
+  }
+`;
+
+const DateContainer = styled.div`
+  width: 305px;
+  height: 71px;
+  flex-shrink: 0;
+  border-radius: 15px;
+  border: 1.5px solid #E7E7E7;
+  background: #FFF;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+`;
+
+const DateText = styled.span`
+  color: ${({ isDateSelected }) => (isDateSelected ? 'black' : '#BCBCBC')};
   font-family: "Pretendard Variable";
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+`;
 
+const CalendarButton = styled.button`
+  background: none;
+  border: none;
   cursor: pointer;
+  img {
+    width: 24px;
+    height: 24px;
+  }
 `;

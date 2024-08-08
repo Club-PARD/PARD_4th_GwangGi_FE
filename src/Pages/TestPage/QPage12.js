@@ -35,10 +35,10 @@ function QPage12() {
             last_donation_date: selectedDate,
             donation_type: selectedButton,
         };
-
+    
         // 콘솔에 수집된 데이터를 출력
         console.log("Form Data:", formData);
-
+    
         // 서버로 전송
         try {
             const response = await axios.post(`${server}api/questionnaire/login`, formData, {
@@ -48,9 +48,12 @@ function QPage12() {
                 },
             });
             console.log("Server Response:", response.data);
+    
+            // 응답 데이터를 상태로 전달하며 페이지 이동
+            navigate('/test_agree', { state: { responseData: response.data } });
         } catch (error) {
             console.error('Error submitting data', error);
-
+    
             // 에러 객체에 대한 추가 정보 로그
             if (error.response) {
                 // 서버가 응답을 반환했지만 상태 코드가 2xx 범위를 벗어남
@@ -66,9 +69,8 @@ function QPage12() {
             }
             console.error('Error config:', error.config);
         }
-
-        navigate('/test_agree');
     };
+    
 
     const handleBack = () => {
         navigate('/test_11');

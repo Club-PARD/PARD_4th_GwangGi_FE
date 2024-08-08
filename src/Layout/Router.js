@@ -37,6 +37,7 @@ import Page1 from "../Pages/RegisterPage/Page1";
 import Page2 from "../Pages/RegisterPage/Page2";
 import Page3 from "../Pages/RegisterPage/Page3";
 import Page4 from "../Pages/RegisterPage/Page4";
+import Page5 from "../Pages/RegisterPage/Page5";
 import { AppProvider } from "../Pages/TestPage/Context";
 
 function Router() {
@@ -69,6 +70,10 @@ function Router() {
                         path="/r_page4"
                         element={<PrivateRoute element={<Page4 />} />}
                     /> 
+                    <Route
+                        path="/r_page5"
+                        element={<PrivateRoute element={<Page5 />} />}
+                    />
                     {/*비로그인 검진 */}
                     <Route
                         path="/test_alert"
