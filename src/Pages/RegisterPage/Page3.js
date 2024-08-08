@@ -9,13 +9,12 @@ import { SubmitBtn as OriginalSubmitBtn } from "./Components/SubmitBtn";
 import { SelectBtn } from "./Components/SelectBtn";
 import { useNavigate } from "react-router-dom";
 import { FormContext } from "./FormContext";
-import { handlePostRegister } from "../../API/LoginAPI";
 
 function Page3() {
   const navigate = useNavigate();
   const { formData, setFormData } = useContext(FormContext);
-  const [selectedBloodType, setSelectedBloodType] = useState(formData.blood_type[0] || null);
-  const [selectedRHFactor, setSelectedRHFactor] = useState(formData.blood_type[1] || null);
+  const [selectedBloodType, setSelectedBloodType] = useState(formData.blood_type.split('')[0] || null);
+  const [selectedRHFactor, setSelectedRHFactor] = useState(formData.blood_type.split('')[1] || null);
 
   useEffect(() => {
     const storedEmail = sessionStorage.getItem('user_email');
@@ -35,7 +34,7 @@ function Page3() {
     setSelectedRHFactor(rhFactor);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     if (selectedBloodType === null || selectedRHFactor === null) {
@@ -47,29 +46,12 @@ function Page3() {
     const rhFactors = ["+", "-"];
     const combinedBloodType = `${bloodTypes[selectedBloodType]}${rhFactors[selectedRHFactor]}`;
 
-    const transformedData = {
+    setFormData({
       ...formData,
-      blood_type: combinedBloodType,
-      height: parseFloat(formData.height),
-      weight: parseFloat(formData.weight)
-    };
+      blood_type: combinedBloodType
+    });
 
-    if (window.confirm("등록하시겠습니까?")) {
-      console.log(transformedData);
-      try {
-        const response = await handlePostRegister(transformedData);
-        if (response.response_object._new_user === false) {
-          alert("등록되었습니다.");
-          navigate("/r_page4");
-        } else {
-          alert("이미 등록된 유저입니다.");
-          navigate("/");
-        }
-      } catch (error) {
-        console.error("등록 중 오류 발생:", error);
-        alert("등록 실패. 다시 시도해 주세요.");
-      }
-    }
+    navigate("/r_page4");
   };
 
   return (

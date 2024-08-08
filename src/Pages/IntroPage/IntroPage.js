@@ -18,10 +18,10 @@ function IntroPage() {
     const settings = {
         arrows: false,
         autoplay: true,
-        autoplaySpeed: 2000,
+        autoplaySpeed: 4000,
         dots: true,
         infinite: true,
-        centerMode: true,
+        centerMode: false,
         speed: 500,
         initialSlide: 1,
         slidesToShow: 1,
@@ -29,57 +29,49 @@ function IntroPage() {
     };
 
     return (
-        <CenteredBaseContainer>
-            <MySlider {...settings}>
-                <Container>
-                    <StyledImage src="/Img/IntroPage/hc.jpeg" alt="테스트" />
-                </Container>
-                <Container>
-                    <StyledImage src="/Img/IntroPage/jh.jpeg" alt="테스트" />
-                </Container>
-                <Container>
-                    <StyledImage src="/Img/IntroPage/mk.jpeg" alt="테스트" />
-                </Container>
-            </MySlider>
+        <CenteredContainer>
+            <SliderWrapper>
+                <MySlider {...settings}>
+                    <StyledImage src="/Img/IntroPage/인트로1.png" alt="테스트" />
+                    <StyledImage src="/Img/IntroPage/인트로2.png" alt="테스트" />
+                    <StyledImage src="/Img/IntroPage/인트로3.png" alt="테스트" />
+                </MySlider>
+            </SliderWrapper>
             <GoogleLoginButton navigate={navigate} />
             <StyledSubmitBtn onClick={handleSubmit}> 
                 자가문진 바로가기
             </StyledSubmitBtn>
-        </CenteredBaseContainer>
+        </CenteredContainer>
     )
 }
 
 export default IntroPage;
 
-const CenteredBaseContainer = styled(BaseContainer)`
+const CenteredContainer = styled(BaseContainer)`
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    height: 100vh;
 `;
 
-const Container = styled.div`
-    margin: 0 auto; /* 가운데 정렬을 위해 마진을 auto로 설정 */
-    max-width: 390px;
-    width: 100vw;
-    height: 443.776px;
-    background-color: #EEEEEE;
+const SliderWrapper = styled.div`
+    width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    margin-bottom: 20px;
 `;
 
 const MySlider = styled(Slider)`
-    width: 100%;
-    max-width: 390px; /* 슬라이더의 최대 너비를 설정 */
+    width: 390px;
     .slick-list {
-        width: 100%;
+        width: 390px;
     }
 `;
 
 const StyledImage = styled.img`
-    width: 100%;
-    height: 100%;
+    width: 390px;
+    height: 443px;
     object-fit: cover;
 `;
 

@@ -1,12 +1,12 @@
 import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import styled from 'styled-components';
 import { BaseContainer } from "../../Layout/Container";
 import { GuideText } from "./Components/GuideText";
 import { TestrContainer } from "./Components/TestContainer";
 import { QBtn } from "./Components/QBtn";
 import StyledRadioButton from "./Components/StyledRadioButton";
 import { SubmitBtn } from "../RegisterPage/Components/SubmitBtn";
-import styled from 'styled-components';
-import { useNavigate } from "react-router-dom";
 
 function AgreePage() {
     const [selectedValue, setSelectedValue] = useState('');
@@ -14,10 +14,15 @@ function AgreePage() {
     const [selectedButton, setSelectedButton] = useState(null);
 
     const navigate = useNavigate();
+    const location = useLocation();
+    const { responseData } = location.state || {};
 
     const handleSubmit = () => {
-        navigate('/test_fail');
-        
+        if (responseData && responseData.response_object && responseData.response_object.eligibility === false) {
+            navigate('/test_fail', { state: { responseData } });
+        } else if (responseData && responseData.response_object && responseData.response_object.eligibility === true) {
+            navigate('/test_success', { state: { responseData } });
+        }
     };
 
     const handleButtonClick = (buttonNumber) => {
@@ -35,8 +40,8 @@ function AgreePage() {
                     헌혈 자가 문진 <br/><p>동의서</p>
                 </GuideText>
                 <Warning>
-                「혈액관리법」제4조의4제4항에 따라 헌혈에 관한<br/>
-                유의사항을 설명 받았으며 다음 사항에 동의합니다.
+                    「혈액관리법」제4조의4제4항에 따라 헌혈에 관한<br/>
+                    유의사항을 설명 받았으며 다음 사항에 동의합니다.
                 </Warning>
                 <Line />
                 <NoticeContainer>
