@@ -12,7 +12,7 @@ import { SubmitBtn } from "../../Layout/SubmitBtn";
 function IntroPage() {
     const navigate = useNavigate();
     const handleSubmit = () => {
-        navigate('/test_alert');
+        navigate('/t_alert');
     };
 
     const settings = {

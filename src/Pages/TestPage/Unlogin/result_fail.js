@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate, useLocation } from "react-router-dom";
-import { BaseContainer } from "../../Layout/Container";
-import { SubmitBtn } from "../RegisterPage/Components/SubmitBtn";
+import { BaseContainer } from "../../../Layout/Container";
+import { SubmitBtn } from "../../RegisterPage/Components/SubmitBtn";
 
 function Result_fail() {
     const [selectedValue, setSelectedValue] = useState('');
@@ -12,7 +12,7 @@ function Result_fail() {
     const { responseData } = location.state || {};
 
     const handleSubmit = () => {
-        navigate('/home');
+        navigate('/');
     };
 
     const handleChange = (value) => {
