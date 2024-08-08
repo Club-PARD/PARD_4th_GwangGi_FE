@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { FlexContainer } from "../../../Layout/Container";
 import { postBloodData } from "../../../API/BloodAPI";
 import { useNavigate } from "react-router-dom";
+import { BackImg, HeaderBackPage, Title } from "../ShowPage/ShowPage";
 
 function SharePage() {
     const bloodData = {
@@ -74,8 +75,11 @@ function SharePage() {
     };  
 
     return (
-        <FlexContainer height = "660px">
-            <BackContainerComponent text="뒤로가기"/>
+        <FlexContainer height="660px">
+            <HeaderBackPage>
+                <BackImg src="/Img/DetailPage/Back.png" alt="뒤로가기" onClick={() => navigate(-1)}/>
+                <Title>헌혈 기록 생성</Title>
+            </HeaderBackPage>
             <InputContainer>
                 <RowBox>
                     <InputTitle>헌혈 날짜</InputTitle>
@@ -134,7 +138,9 @@ function SharePage() {
         </FlexContainer>
     );
 }
-
+const BackContainerComponentSharePage = styled.div`
+    margin-top : 20px;
+`;
 const CreateButton2 = styled(CreateButton)` 
     margin-top: 50px;
 

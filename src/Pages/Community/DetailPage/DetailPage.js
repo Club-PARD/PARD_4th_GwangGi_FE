@@ -52,7 +52,7 @@ function DetailPage() {
                     <FirstColumnBox>
                         <BestChallengeInfoTitle>{challengeInfo.challenge_name}</BestChallengeInfoTitle>
                         <TagBox>
-                            <Tag>{challengeInfo.challenge_age}대</Tag>
+                            <Tag>{challengeInfo.challenge_age}</Tag>
                             <Tag>{handleChangeGenderWord(challengeInfo.challenge_gender) || "없음"}</Tag>
                             <Tag $marginRight="0px">{challengeInfo.challenge_org}</Tag>
                         </TagBox>
@@ -145,7 +145,7 @@ const ChallengeDetailContainer = styled.div`
     height : auto;
     margin : 0px 22px;
     box-sizing: border-box;
-    background-color: #ffffff;
+    background-color: #f9f9f9;
 
     padding : 20px 35px;
     border-radius: 25px;
@@ -184,7 +184,7 @@ const ChallengeDescriptionContent = styled.p`
     text-align: left;
     color : #000000;
 
-    background-color: #F9F9F9;
+    background-color: #EAEAEA;
     padding : 30px 10px;
     border-radius: 15px;
 

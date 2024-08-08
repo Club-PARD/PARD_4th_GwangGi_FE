@@ -8,6 +8,7 @@ import { getMyChallengeInfo } from "../../API/ChallengeAPI";
 import handleChangeGenderWord from "../../Layout/HandleChange";
 import ChallengeItem from "../../Pages/HomePage/Components/ChellengeItem";
 import { DropdownButton, DropDownImage, DropdownItem, DropdownMenu } from "../Community/ListPage/ListPage";
+import { getBloodTypeImage } from "../Community/ShowPage/ShowPage";
 
 function MyPage() {
     const [userInfo, setUserInfo] = useState({});
@@ -24,10 +25,12 @@ function MyPage() {
 
             if (response.response_object === null || response.response_object === undefined) {
                 alert("유저 정보가 없습니다.");
+                window.sessionStorage.clear();
+                navigate("/");
             } else if (response === 500) {
                 alert("[에러] 관리자에게 문의하세요 (서버 500) /  getUserInfo")
             } else {
-                // console.log(response);
+                console.log(response);
                 setUserInfo(response.response_object);
                 setUpdateUserInfo({
                     ...response.response_object,
@@ -39,7 +42,7 @@ function MyPage() {
         const fetchData2 = async () => {
             const response = await getUserAbleTo();
             // console.log(response);
-            if (response.response_object === null || response.response_object === undefined) {
+            if (response?.response_object === null || response?.response_object === undefined) {
                 // alert("헌혈 내역이 없습니다.");
                 console.log("헌혈 내역이 없습니다.");
             } else if (response === 500) {
@@ -52,7 +55,7 @@ function MyPage() {
 
         const fetchData3 = async () => {
             const response = await getMyChallengeInfo();
-            setChallengeInfo(response.response_object);
+            setChallengeInfo(response?.response_object);
         };
         fetchData();
         fetchData2();
@@ -180,14 +183,24 @@ function MyPage() {
                         )
                         : (
                             <UserInfoContainer>
-                                <UserName>{userInfo.name}님</UserName>
-                                <TagBox>
-                                    <UserGender>{handleChangeGenderWord(userInfo.gender)}</UserGender>
-                                    <UserBirthday>{handleCalculateAge(userInfo.birthday)}살</UserBirthday>
-                                    <UserHeight>{userInfo.height}cm</UserHeight>
-                                    <UserWeight>{userInfo.weight}kg</UserWeight>
-                                    <UserBloodType>{userInfo.blood_type}형</UserBloodType>
-                                </TagBox>
+                                <FirstColumn>
+                                    <UserName>{userInfo.name}님</UserName>
+                                    <TagBox>
+                                        <UserGender>{handleChangeGenderWord(userInfo.gender)}</UserGender>
+                                        <UserBirthday>{handleCalculateAge(userInfo.birthday)}살</UserBirthday>
+                                        <UserBloodType>{userInfo.blood_type}형</UserBloodType>
+                                    </TagBox>
+                                    <TagBox>
+                                        <UserHeight>{userInfo.height}cm</UserHeight>
+                                        <UserWeight>{userInfo.weight}kg</UserWeight>
+                                    </TagBox>
+                                </FirstColumn>
+                                <SecondColumn>
+                                    <BloodImg
+                                        src={getBloodTypeImage(userInfo.blood_type)} 
+                                        alt={`${userInfo.blood_type} 혈액형`}
+                                    />
+                                </SecondColumn>
                             </UserInfoContainer>
                         )
                 }
@@ -215,7 +228,7 @@ function MyPage() {
                     참여 중인 챌린지
                 </InfoTitle>
                 {
-                    challengeInfo.map((challengeInfo, index) => (
+                    challengeInfo?.map((challengeInfo, index) => (
                         // <ChallengeItem challengeInfo={challengeInfo} index={index} marginRight="22px" />
                         <ChallengeItem key={index} navigate = {navigate} challengeInfo={challengeInfo} index={index} width={"100%"} marginBottom={"20px"} />
                     ))
@@ -234,9 +247,10 @@ const UserData = styled.p`
     font-family: 'PretendardVariable';
 `;
 const UserName = styled(UserData)`
-    font-size: 25px;
-    font-weight: 700;
-    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 23.87px;
+    margin-bottom: 15px;
 
 `;
 
@@ -246,9 +260,17 @@ const Tag = styled(UserData)`
     background-color: #EAEAEA;
     color : #7D7D7D;
 
-    padding : 5px 10px;
+    padding : 5px 7px;
     box-sizing: border-box;
     border-radius: 5px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 15.6px;
+    color : #7D7D7D;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 
 const UserGender = styled(Tag)`
@@ -292,11 +314,13 @@ const CancelButton = styled.button `
 
 const ProfileContainer = styled.div`
     width: auto;
-    height : auto;
+    height : 132px;
     background-color: #f9f9f9;
-    padding : 0px 22px;
+    margin : 0px 22px;
+    padding : 25px 30px;
     padding-bottom: 20px;
-    border-radius: 0px 0px 20px 20px;
+    border-radius: 25px;
+    box-sizing: border-box;
 `;
 const InfoContainer = styled.div`
     width: 100%;
@@ -308,11 +332,12 @@ const InfoContainer = styled.div`
 
 const InfoTitle = styled.p`
     font-family: 'PretendardVariable';
-    font-size: 20px;
-    font-weight: 700;
-    line-height: 23px;
+    font-size : 17px;
+    font-weight: 600;
+    line-height: 22.1px;
     text-align: left;
     padding-bottom: 20px;
+    color : #000000;
 `;
 
 const UserInfoContainer = styled.div`
@@ -320,12 +345,31 @@ const UserInfoContainer = styled.div`
     height : auto;
     /* padding : 25px 30px; */
     box-sizing: border-box;
+
+    display: flex;
+    justify-content: space-between;
 `;
 
 const TagBox = styled.div`
     width: 100%;
     display: flex;
+    height : 19px;
+
+    margin-bottom: 10px;
 
 
+`;
+
+const FirstColumn = styled.div`
+    display: flex;
+    flex-direction: column;
+`
+const SecondColumn = styled.div`
+
+`;
+
+const BloodImg = styled.img`
+    width : 61.64px;
+    height : 61.64px;
 `;
 export default MyPage;

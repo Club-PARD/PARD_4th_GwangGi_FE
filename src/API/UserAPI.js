@@ -13,7 +13,7 @@ export const getUserInfo = async () => {
         );
         // console.log("getUserInfo success");
         // console.log(response.data);
-        return response.data;
+        return response?.data;
     } catch (error) {
         console.log("getUserInfo fail", error);
         return 500;
@@ -33,7 +33,7 @@ export const getUserAbleTo = async () => {
         );
         // console.log("getUserAbleTo success");
         // console.log("after", response);
-        return response.data;
+        return response?.data;
     } catch (error) {
         console.log("getUserAbleTo fail", error);
         return 500;

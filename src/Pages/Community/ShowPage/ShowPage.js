@@ -31,11 +31,7 @@ function ShowPage() {
         setTotalDonations(total);
     };
 
-    const getBloodTypeImage = (bloodType) => {
-        const type = bloodType.slice(0, -1); // 마지막 문자(+ 또는 -)를 제외한 혈액형
-        const suffix = bloodType.endsWith('+') ? '_p.png' : '_m.png';
-        return `/Img/ShowPage/${type}${suffix}`;
-    };
+
     const typeOptions = [
         { value: 0, label: '전혈' },
         { value: 1, label: '혈장 성분 헌혈' },
@@ -130,8 +126,12 @@ function ShowPage() {
     )
 }
 
-
-const HeaderBackPage = styled.div`
+export const getBloodTypeImage = (bloodType) => {
+    const type = bloodType?.slice(0, -1); // 마지막 문자(+ 또는 -)를 제외한 혈액형
+    const suffix = bloodType?.endsWith('+') ? '_p.png' : '_m.png';
+    return `/Img/ShowPage/${type}${suffix}`;
+};
+export const HeaderBackPage = styled.div`
     display: flex;
     padding : 20px 22px;
     height : 30px;
@@ -139,13 +139,13 @@ const HeaderBackPage = styled.div`
     align-items: center;
 `;
 
-const BackImg = styled.img`
+export const BackImg = styled.img`
     width : 7.77px;
     height : 15.7px;
     margin-right: 120px;
 `;
 
-const Title = styled.p`
+export const Title = styled.p`
     font-family: 'PretendardVariable';
     font-size: 18px;
     font-weight: 600;

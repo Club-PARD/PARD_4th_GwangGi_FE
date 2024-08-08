@@ -7,13 +7,13 @@ import { handlePostChallenge } from "../../../API/ChallengeAPI";
 
 function CreatePage() {
     const challengeData = {
-        challenge_name: "",
-        challenge_description: "",
-        challenge_start_date: "",
-        challenge_end_date: "-08-04T10:43:17.784Z",
-        challenge_age: "",
-        challenge_org: "",
-        challenge_gender: "",
+        challenge_name:null,
+        challenge_description: null,
+        challenge_start_date:null,
+        challenge_end_date: null,
+        challenge_age: null,
+        challenge_org: null,
+        challenge_gender:null,
     };
 
     const [newChallengeData, setNewChallengeData] = useState(challengeData);
@@ -27,9 +27,22 @@ function CreatePage() {
             [name]: value,
         });
     };
-
     const handleCreateChallenge = async () => {
         try {
+            const startDate = new Date(newChallengeData.challenge_start_date);
+            const endDate = new Date(newChallengeData.challenge_end_date);
+            const today = new Date();
+
+            if (startDate >= endDate) {
+                alert("시작 날짜는 종료 날짜보다 이전이어야 합니다.");
+                return;
+            }
+
+            if (endDate <= today) {
+                alert("종료 날짜는 오늘 날짜보다 이후여야 합니다.");
+                return;
+            }
+
             if (window.confirm("챌린지를 생성하시겠습니까?")) {
                 const response = await handlePostChallenge(newChallengeData);
                 console.log(response);
@@ -112,56 +125,54 @@ function CreatePage() {
                         placeholder="Ex) 직장 생활하느라 고생하시는 분들을 위해..."
                     />
                 </RowBox>
-                <FlexContainer $flexDirection="row">
-                    <RowBox style={{ marginRight: "20px" }}>
-                        <InputTitle>챌린지 연령대</InputTitle>
-                        <SelectBox>
-                            <DropdownButton onClick={() => setViewAgeDropdown(!viewAgeDropdown)}>
-                                {newChallengeData.challenge_age || '연령대 선택'}
-                                <DropDownImage
-                                    src={viewAgeDropdown ? "/Img/ListPage/DropDownUp2.png" : "/Img/ListPage/DropDownDown2.png"}
-                                    alt="드롭다운 이미지"
-                                />
-                            </DropdownButton>
-                            {viewAgeDropdown && (
-                                <Dropdown
-                                    options={ageOptions}
-                                    onSelect={(value) => {
-                                        setNewChallengeData({
-                                            ...newChallengeData,
-                                            challenge_age: value
-                                        });
-                                        setViewAgeDropdown(false);
-                                    }}
-                                />
-                            )}
-                        </SelectBox>
-                    </RowBox>
-                    <RowBox>
-                        <InputTitle>챌린지 성별</InputTitle>
-                        <SelectBox>
-                            <DropdownButton onClick={() => setViewGenderDropdown(!viewGenderDropdown)}>
-                                {newChallengeData.challenge_gender === '' ? '성별 선택' : genderOptions.find(option => option.value === newChallengeData.challenge_gender)?.label}
-                                <DropDownImage
-                                    src={viewGenderDropdown ? "/Img/ListPage/DropDownUp2.png" : "/Img/ListPage/DropDownDown2.png"}
-                                    alt="드롭다운 이미지"
-                                />
-                            </DropdownButton>
-                            {viewGenderDropdown && (
-                                <Dropdown
-                                    options={genderOptions}
-                                    onSelect={(value) => {
-                                        setNewChallengeData({
-                                            ...newChallengeData,
-                                            challenge_gender: value
-                                        });
-                                        setViewGenderDropdown(false);
-                                    }}
-                                />
-                            )}
-                        </SelectBox>
-                    </RowBox>
-                </FlexContainer>
+                <RowBox>
+                    <InputTitle>챌린지 연령대</InputTitle>
+                    <SelectBox>
+                        <DropdownButton onClick={() => setViewAgeDropdown(!viewAgeDropdown)}>
+                            {newChallengeData.challenge_age || '연령대 선택'}
+                            <DropDownImage
+                                src={viewAgeDropdown ? "/Img/ListPage/DropDownUp2.png" : "/Img/ListPage/DropDownDown2.png"}
+                                alt="드롭다운 이미지"
+                            />
+                        </DropdownButton>
+                        {viewAgeDropdown && (
+                            <Dropdown
+                                options={ageOptions}
+                                onSelect={(value) => {
+                                    setNewChallengeData({
+                                        ...newChallengeData,
+                                        challenge_age: value
+                                    });
+                                    setViewAgeDropdown(false);
+                                }}
+                            />
+                        )}
+                    </SelectBox>
+                </RowBox>
+                <RowBox>
+                    <InputTitle>챌린지 성별</InputTitle>
+                    <SelectBox>
+                        <DropdownButton onClick={() => setViewGenderDropdown(!viewGenderDropdown)}>
+                            {newChallengeData.challenge_gender === null ? '성별 선택' : genderOptions.find(option => option.value === newChallengeData.challenge_gender)?.label}
+                            <DropDownImage
+                                src={viewGenderDropdown ? "/Img/ListPage/DropDownUp2.png" : "/Img/ListPage/DropDownDown2.png"}
+                                alt="드롭다운 이미지"
+                            />
+                        </DropdownButton>
+                        {viewGenderDropdown && (
+                            <Dropdown
+                                options={genderOptions}
+                                onSelect={(value) => {
+                                    setNewChallengeData({
+                                        ...newChallengeData,
+                                        challenge_gender: value
+                                    });
+                                    setViewGenderDropdown(false);
+                                }}
+                            />
+                        )}
+                    </SelectBox>
+                </RowBox>
                 <RowBox>
                     <InputTitle>챌린지 장소/조직</InputTitle>
                     <Input
@@ -233,11 +244,12 @@ export const Input = styled.input`
     border: 1.5px solid #E7E7E7;
     border-radius: 15px;
     padding-left: 10px;
+    padding-right: 10px;
     box-sizing: border-box;
     font-family: 'PretendardVariable';
-    font-size: 15px;
+    font-size: 13px;
     font-weight: 500;
-    line-height: 19.5px;
+    line-height: 15.5px;
     text-align: left;
     outline: none;
     
@@ -265,6 +277,7 @@ export const TextArea = styled.textarea`
     outline: none;
     resize: none;
     
+    
     &::placeholder {
         color: #BCBCBC;
     }
@@ -280,7 +293,8 @@ export const SelectBox = styled.div`
 `;
 
 export const DropdownButton = styled.div`
-    width: 130px;
+    width: auto;
+    height : 51.82px;
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -290,19 +304,20 @@ export const DropdownButton = styled.div`
     color: #000000;
     background-color: #fff;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 15px;
+    box-sizing: border-box;
     padding: 5px 10px;
     justify-content: space-between;
 `;
 
 export const DropdownMenu = styled.ul`
-    position: absolute;
+    position: 100%;
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 5px;
     list-style-type: none;
     padding: 0;
-    width: 150px;
+    width: auto;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     z-index: 1;
 `;
@@ -310,7 +325,7 @@ export const DropdownMenu = styled.ul`
 export const DropdownItem = styled.li`
     padding: 10px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 13px;
     font-family: "Pretendard Variable";
     color: #000000;
 

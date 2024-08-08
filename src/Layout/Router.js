@@ -225,14 +225,14 @@ function Router() {
                             path="/create"
                             element={<PrivateRoute element={<CreatePage />} />}
                         />
-                        <Route
-                            path="/share"
-                            element={<PrivateRoute element={<SharePage />} />}
-                        />
                     </Route>
                     <Route
                         path="/show/:challenge_id"
                         element={<PrivateRoute element={<ShowPage />} />}
+                    />
+                    <Route
+                        path="/share"
+                        element={<PrivateRoute element={<SharePage />} />}
                     />
                 </Route>
             </Routes>

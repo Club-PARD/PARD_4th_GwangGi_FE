@@ -56,7 +56,7 @@ function ListPage() {
             </SelectBox>
             <ChallengeInfoContainer>
                 {challengeInfo.map((challengeInfo, index) => (
-                    <ChallengeItem key={index} navigate={navigate} challengeInfo={challengeInfo} index={index} width={"100%"} marginBottom={"20px"} backgroundColor = "#ffffff" />
+                    <ChallengeItem key={index} navigate={navigate} challengeInfo={challengeInfo} index={index} width={"100%"} marginBottom={"20px"} backgroundColor = "#f9f9f9" />
                 ))}
             </ChallengeInfoContainer>
             <CreateImg src = "/Img/ListPage/CreateLogo.png" alt = "챌린지 생성 이미지" onClick={() => navigate("/create")}/>
@@ -81,7 +81,7 @@ const SelectBox = styled.div`
     padding: 0px 22px;
     box-sizing: border-box;
     justify-content: end;
-    background-color: #f9f9f9;
+    background-color: #ffffff;
 `;
 
 const CreateChallengeButton = styled(Link)`
@@ -105,13 +105,14 @@ const CreateChallengeButton = styled(Link)`
 `;
 
 export const DropDownImage = styled.img`
-    width: 15px;
-    height: 15px;
+    width: 13px;
+    height: 11.33px;
     margin-left: 10px;
 `;
 
 export const DropdownButton = styled.div`
     width : 130px;
+    box-sizing: border-box;
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -128,7 +129,7 @@ export const DropdownButton = styled.div`
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 5px;
-    padding: 5px 10px;
+    padding : 5px 10px;
 
     justify-content: space-between;
 `;
