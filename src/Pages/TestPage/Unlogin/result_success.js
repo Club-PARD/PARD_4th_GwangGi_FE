@@ -1,16 +1,16 @@
 import { useState } from "react";
 import styled from 'styled-components';
 import { useNavigate } from "react-router-dom";
-import { BaseContainer } from "../../Layout/Container";
-import { TestrContainer } from "./Components/TestContainer";
-import { SubmitBtn } from "../RegisterPage/Components/SubmitBtn";
+import { BaseContainer } from "../../../Layout/Container";
+import { TestrContainer } from "../Components/TestContainer";
+import { SubmitBtn } from "../../RegisterPage/Components/SubmitBtn";
 
 function Result_success() {
     const [selectedValue, setSelectedValue] = useState('');
     const navigate = useNavigate();
 
     const handleSubmit = () => {
-        navigate('/home');
+        navigate('/');
     };
 
     const handleChange = (value) => {

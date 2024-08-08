@@ -12,6 +12,7 @@ import ShowPage from "../Pages/Community/ShowPage/ShowPage";
 import Layout from "./Layout";
 import PublicRoute from "../Layout/PublicRoute";
 import PrivateRoute from "../Layout/PrivateRoute";
+
 import BaseLayout from "../Layout/BaseLayout";
 
 import AlertPage from "../Pages/TestPage/AlertPage";
@@ -32,6 +33,24 @@ import AgreePage from "../Pages/TestPage/AgreePage";
 import Result_success from "../Pages/TestPage/result_success";
 import Result_fail from "../Pages/TestPage/result_fail";
 
+import AlertPaget from "../Pages/TestPage/Unlogin/AlertPage";
+import StartPaget from "../Pages/TestPage/Unlogin/StartPage";
+import QPage1t from "../Pages/TestPage/Unlogin/QPage1";
+import QPage2t from "../Pages/TestPage/Unlogin/QPage2";
+import QPage3t from "../Pages/TestPage/Unlogin/QPage3";
+import QPage4t from "../Pages/TestPage/Unlogin/QPage4";
+import QPage5t from "../Pages/TestPage/Unlogin/QPage5";
+import QPage6t from "../Pages/TestPage/Unlogin/QPage6";
+import QPage7t from "../Pages/TestPage/Unlogin/QPage7";
+import QPage8t from "../Pages/TestPage/Unlogin/QPage8";
+import QPage9t from "../Pages/TestPage/Unlogin/QPage9";
+import QPage10t from "../Pages/TestPage/Unlogin/QPage10";
+import QPage11t from "../Pages/TestPage/Unlogin/QPage11";
+import QPage12t from "../Pages/TestPage/Unlogin/QPage12";
+import AgreePaget from "../Pages/TestPage/Unlogin/AgreePage";
+import Result_successt from "../Pages/TestPage/Unlogin/result_success";
+import Result_failt from "../Pages/TestPage/Unlogin/result_fail";
+
 import { FormProvider } from "../Pages/RegisterPage/FormContext";
 import Page1 from "../Pages/RegisterPage/Page1";
 import Page2 from "../Pages/RegisterPage/Page2";
@@ -39,6 +58,7 @@ import Page3 from "../Pages/RegisterPage/Page3";
 import Page4 from "../Pages/RegisterPage/Page4";
 import Page5 from "../Pages/RegisterPage/Page5";
 import { AppProvider } from "../Pages/TestPage/Context";
+import { AppProvider2 } from "../Pages/TestPage/Unlogin/Context";
 
 function Router() {
     return (
@@ -75,65 +95,74 @@ function Router() {
                         element={<PrivateRoute element={<Page5 />} />}
                     />
                     {/*비로그인 검진 */}
+                    
                     <Route
-                        path="/test_alert"
-                        element={<AlertPage />}
+                        path="/t_alert"
+                        element={<PublicRoute element={<AlertPaget />} />}
                     />
                     <Route
-                        path="/test_start"
-                        element={<StartPage />}
+                        path="/t_start"
+                        element={<PublicRoute element={<StartPaget />} />}
                     />
                     <Route
-                        path="/test_1"
-                        element={<QPage1 />}
+                        path="/t_1"
+                        element={<PublicRoute element={<QPage1t />} />}
                     />
                     <Route
-                        path="/test_2"
-                        element={<QPage2 />}
+                        path="/t_2"
+                        element={<PublicRoute element={<QPage2t />} />}
                     />
                     <Route
-                        path="/test_3"
-                        element={<QPage3 />}
+                        path="/t_3"
+                        element={<PublicRoute element={<QPage3t />} />}
                     />
                     <Route
-                        path="/test_4"
-                        element={<QPage4 />}
+                        path="/t_4"
+                        element={<PublicRoute element={<QPage4t />} />}
                     />
                     <Route
-                        path="/test_5"
-                        element={<QPage5 />}
+                        path="/t_5"
+                        element={<PublicRoute element={<QPage5t />} />}
                     />
                     <Route
-                        path="/test_6"
-                        element={<QPage6 />}
+                        path="/t_6"
+                        element={<PublicRoute element={<QPage6t />} />}
                     />
                     <Route
-                        path="/test_7"
-                        element={<QPage7 />}
+                        path="/t_7"
+                        element={<PublicRoute element={<QPage7t />} />}
                     />
                     <Route
-                        path="/test_8"
-                        element={<QPage8 />}
+                        path="/t_8"
+                        element={<PublicRoute element={<QPage8t />} />}
                     />
                     <Route
-                        path="/test_9"
-                        element={<QPage9 />}
+                        path="/t_9"
+                        element={<PublicRoute element={<QPage9t />} />}
                     />
                     <Route
-                        path="/test_10"
-                        element={<QPage10 />}
+                        path="/t_10"
+                        element={<PublicRoute element={<QPage10t />} />}
                     />
                     <Route
-                        path="/test_11"
-                        element={<QPage11 />}
+                        path="/t_11"
+                        element={<PublicRoute element={<QPage11t />} />}
                     />
                     <Route
-                        path="/test_12"
-                        element={<QPage12 />}
+                        path="/t_12"
+                        element={<PublicRoute element={<QPage12t />} />}
                     />
                     <Route
-                        path="/test_agree"
-                        element={<AgreePage />}
+                        path="/t_agree"
+                        element={<PublicRoute element={<AgreePaget />} />}
+                    />
+                    <Route
+                        path="/t_success"
+                        element={<PublicRoute element={<Result_successt />} />}
+                    />
+                    <Route
+                    path="/t_fail"
+                    element={<PublicRoute element={<Result_failt />} />}
                     />
                     {/*로그인 후 검진 */}
                     <Route
