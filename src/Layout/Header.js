@@ -15,11 +15,12 @@ function Header() {
         return path.split("/").pop();
     };
 
-
+    const navigate = useNavigate();
     return (
         <div>
             <HeaderContainer>
-                <LogoText to = "/home">블릿지</LogoText>
+                {/* <LogoText to = "/home">블릿지</LogoText> */}
+                <LogoImg src = "/Img/BLRIDGE.png" onClik = {() => navigate("/home")}/>
                 <MenuBox>
                     <MenuItem to = "/home" $isActive={getCurrentPath() === "home" | getCurrentPath() === "share"}>홈</MenuItem>
                     <MenuItem to = "/list" $isActive={getCurrentPath() === "list" || getCurrentPath() === "detail" || getCurrentPath() === "create"}>챌린지</MenuItem>
@@ -29,7 +30,10 @@ function Header() {
         </div>
     )
 }
-
+const  LogoImg = styled.img`
+    width : 111px;
+    margin-bottom : 20px;
+`
 const HeaderContainer = styled(BaseContainer)`
     height : 130px;
     padding : 0px 22px;

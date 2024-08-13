@@ -12,7 +12,7 @@ function InfoBoxComponent({ navigate, ableTo }) {
         <div>
             <InfoBox>
                 <InfoTitle>헌혈 가능 여부</InfoTitle>
-                {/* {console.log("what", ableTo)} */}
+                {console.log("what", ableTo)}
                 {ableTo === null
                     ? 
                         <RowBox>
@@ -23,7 +23,7 @@ function InfoBoxComponent({ navigate, ableTo }) {
                             </SubRowBox>
                             <TestBox to = "/test_alert">문진하기</TestBox>
                         </RowBox>
-                    : ableTo > 0
+                    : ableTo <= 0
                         ? 
                             <RowBox>
                                 <Img src="/Img/HomePage/Blood_true.png" alt="주사바늘 이미지" />

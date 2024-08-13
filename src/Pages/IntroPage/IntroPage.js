@@ -32,9 +32,9 @@ function IntroPage() {
         <CenteredContainer>
             <SliderWrapper>
                 <MySlider {...settings}>
-                    <StyledImage src="/Img/IntroPage/인트로1.png" alt="테스트" />
-                    <StyledImage src="/Img/IntroPage/인트로2.png" alt="테스트" />
-                    <StyledImage src="/Img/IntroPage/인트로3.png" alt="테스트" />
+                    <StyledImage src="/Img/IntroPage/Intro.png" alt="테스트" />
+                    <StyledImage src="/Img/IntroPage/Intro.png" alt="테스트" />
+                    <StyledImage src="/Img/IntroPage/Intro.png" alt="테스트" />
                 </MySlider>
             </SliderWrapper>
             <GoogleLoginButton navigate={navigate} />

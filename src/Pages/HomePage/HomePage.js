@@ -56,6 +56,7 @@ function HomePage() {
             <BestChallengComponent navigate={navigate } BestChallengeInfo={BestChallengeInfo} />
             {/* <Button onClick={getUserInfo}>테스트</Button> */}
             {/* <Link to="/mypage">마이 페이지</Link> */}
+            <LogOutButton onClick={() => navigate("/test_alert")}>문진 보기</LogOutButton>
             <LogOutButton onClick={handleLogOut}>로그아웃</LogOutButton>
         </HomePageContainer>
     )
